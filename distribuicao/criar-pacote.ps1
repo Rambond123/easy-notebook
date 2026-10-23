@@ -15,7 +15,7 @@ if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
 $outputDir = [System.IO.Path]::GetFullPath($OutputDirectory)
 $stageDir = Join-Path $outputDir ".stage-$version"
 $zipPath = Join-Path $outputDir "Easy-Notebook-$version.zip"
-$payloadDir = Join-Path $stageDir 'Arquivos Easy Notebook'
+$payloadDir = Join-Path $stageDir 'Easy Notebook'
 
 $runtimeFiles = @(
     'background.js', 'configuration.js', 'content.js', 'db.js',
@@ -33,15 +33,12 @@ if (Test-Path -LiteralPath $zipPath) { Remove-Item -LiteralPath $zipPath -Force 
 New-Item -ItemType Directory -Path $payloadDir -Force | Out-Null
 
 try {
-    Copy-Item -LiteralPath (Join-Path $PSScriptRoot '0 - PRIMEIRO CLIQUE EM EXTRAIR TUDO.html') -Destination $stageDir
-    Copy-Item -LiteralPath (Join-Path $PSScriptRoot '1 - INSTALAR EASY NOTEBOOK.cmd') -Destination $stageDir
+    Copy-Item -LiteralPath (Join-Path $PSScriptRoot '0 - COMECE AQUI.html') -Destination $stageDir
 
     foreach ($relativePath in $runtimeFiles) {
         Copy-Item -LiteralPath (Join-Path $repoDir $relativePath) -Destination (Join-Path $payloadDir $relativePath)
     }
     Copy-Item -LiteralPath (Join-Path $repoDir 'icons') -Destination $payloadDir -Recurse
-    Copy-Item -LiteralPath (Join-Path $repoDir 'instalador') -Destination $payloadDir -Recurse
-
     Compress-Archive -Path (Join-Path $stageDir '*') -DestinationPath $zipPath -CompressionLevel Optimal
     Write-Output $zipPath
 }
