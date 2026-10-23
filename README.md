@@ -91,6 +91,15 @@ O protocolo de upload é interno ao Notebook e pode mudar. Referência de pesqui
 4. Clique no ícone Easy Notebook, configure o link de um notebook específico e salve.
 5. Recarregue as páginas do eproc e do Notebook após instalar/atualizar a extensão.
 
+### Instalação guiada para usuários finais
+
+1. Baixe e extraia todo o ZIP da Easy Notebook.
+2. Execute **Instalar Easy Notebook.cmd**.
+3. O instalador copia somente os arquivos necessários para a pasta Documentos do usuário atual, em `Eprocando\Easy Notebook`. O local é obtido do próprio Windows e funciona também quando Documentos está redirecionado para o OneDrive.
+4. O Chrome abre a tela de extensões e um guia visual. O caminho da pasta fica copiado para ser colado na janela de **Carregar sem compactação**.
+
+O Chrome exige que o próprio usuário ative o modo do desenvolvedor e confirme a pasta. Uma página comum não pode clicar nos controles de `chrome://extensions` nem instalar silenciosamente uma extensão fora da Chrome Web Store.
+
 ## Prompts
 
 O botão flutuante Easy Notebook abre a biblioteca. Cadastre prompts locais na configuração. **Usar** preenche a conversa e não envia a pergunta. Abra a aba Chat antes de inserir.

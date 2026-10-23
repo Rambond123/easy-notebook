@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instalar Easy Notebook</title>
+  <style>
+    :root { color-scheme: light; font-family: Arial, sans-serif; --blue:#0b57d0; --yellow:#fff3a6; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:#f5f7fb; color:#1f2937; }
+    main { max-width:960px; margin:0 auto; padding:32px 22px 48px; }
+    header { display:flex; gap:18px; align-items:center; margin-bottom:24px; }
+    .logo { width:66px; height:66px; border-radius:18px; background:white; padding:10px; box-shadow:0 8px 24px #1d4ed822; }
+    h1 { margin:0 0 5px; font-size:30px; }
+    header p { margin:0; color:#526176; font-size:17px; }
+    .ready { background:#e8f5e9; border:2px solid #34a853; border-radius:14px; padding:14px 18px; font-weight:700; margin-bottom:22px; }
+    .tabs { display:flex; gap:8px; margin-bottom:14px; }
+    .tab { flex:1; padding:13px; text-align:center; border-radius:10px; background:#e5e7eb; font-weight:700; }
+    .tab:first-child { background:#dbeafe; color:#174ea6; box-shadow:inset 0 0 0 2px #4285f4; }
+    .browser { background:#202124; color:#e8eaed; border-radius:16px; padding:22px; box-shadow:0 18px 44px #11182735; }
+    .browser-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:26px; }
+    .browser h2 { margin:0; font-size:22px; }
+    .toggle-wrap { display:flex; align-items:center; gap:12px; position:relative; padding:12px 16px; border-radius:14px; }
+    .toggle { width:48px; height:26px; border-radius:20px; background:#5f6368; position:relative; }
+    .toggle::after { content:""; width:20px; height:20px; border-radius:50%; background:#fff; position:absolute; left:3px; top:3px; }
+    .click-here { animation:pulse 1.15s infinite; background:var(--yellow); color:#8a3b00; box-shadow:0 0 0 4px #ffcc00; }
+    .click-here::before { content:"CLIQUE AQUI"; position:absolute; right:7px; top:-29px; color:#ffdf42; font-weight:900; font-size:15px; }
+    @keyframes pulse { 50% { box-shadow:0 0 0 9px #ffcc0044; transform:scale(1.02); } }
+    .buttons { display:flex; gap:12px; margin:8px 0 24px; }
+    .chrome-button { border:1px solid #8ab4f8; color:#8ab4f8; background:#292a2d; border-radius:20px; padding:10px 18px; font-weight:700; position:relative; }
+    .chrome-button.primary { background:#fff3a6; color:#8a3b00; border-color:#ffcc00; animation:pulse 1.15s infinite; }
+    .chrome-button.primary::after { content:"2. DEPOIS CLIQUE AQUI"; position:absolute; left:10px; top:-28px; white-space:nowrap; color:#ffdf42; font-size:14px; }
+    .card { border:1px solid #5f6368; background:#292a2d; border-radius:12px; padding:18px; color:#bdc1c6; }
+    .instructions { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:22px; }
+    .step { background:white; border-radius:14px; padding:20px; box-shadow:0 6px 20px #11182712; }
+    .step strong { display:block; color:#174ea6; margin-bottom:7px; font-size:18px; }
+    .path { margin-top:12px; padding:12px; border:2px dashed #4285f4; border-radius:10px; background:#eff6ff; word-break:break-all; font-family:Consolas, monospace; }
+    button.copy { margin-top:12px; width:100%; border:0; border-radius:10px; padding:12px; background:var(--blue); color:white; font-weight:700; cursor:pointer; }
+    .done { border-left:6px solid #34a853; }
+    .small { color:#667085; font-size:14px; }
+    @media (max-width:700px) { .instructions { grid-template-columns:1fr; } .browser-top { align-items:flex-start; gap:30px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <img class="logo" src="icons/notebook.svg" alt="Easy Notebook">
+    <div><h1>Instalação da Easy Notebook</h1><p>A pasta já foi preparada. Faltam somente três cliques no Chrome.</p></div>
+  </header>
+
+  <div class="ready">✓ A guia “Extensões” já está aberta ao lado desta. Clique nela para continuar.</div>
+  <div class="tabs"><div class="tab">chrome://extensions — CLIQUE NESTA GUIA</div><div class="tab">Guia de instalação</div></div>
+
+  <section class="browser" aria-label="Exemplo visual da página de extensões do Chrome">
+    <div class="browser-top">
+      <h2>Extensões</h2>
+      <div class="toggle-wrap click-here"><span>1. Modo do desenvolvedor</span><span class="toggle"></span></div>
+    </div>
+    <div class="buttons">
+      <span class="chrome-button primary">Carregar sem compactação</span>
+      <span class="chrome-button">Compactar extensão</span>
+      <span class="chrome-button">Atualizar</span>
+    </div>
+    <div class="card">Depois de carregar a pasta, o cartão “Easy Notebook” aparecerá aqui.</div>
+  </section>
+
+  <section class="instructions">
+    <div class="step">
+      <strong>3. Escolha a pasta preparada</strong>
+      Cole este caminho na barra da janela que abrir e pressione Enter. Depois clique em “Selecionar pasta”.
+      <div class="path" id="install-path">{{INSTALL_PATH_HTML}}</div>
+      <button class="copy" id="copy-path" type="button">Copiar caminho novamente</button>
+      <p class="small" id="copy-status">O instalador já deixou esse caminho copiado.</p>
+    </div>
+    <div class="step done">
+      <strong>Pronto</strong>
+      A Easy Notebook abrirá seu assistente de configuração. Informe o link do Notebook que será usado e siga os passos da própria extensão.
+      <p class="small">Não mova nem apague a pasta <b>Documentos\Eprocando\Easy Notebook</b> depois da instalação.</p>
+    </div>
+  </section>
+</main>
+<script>
+  const installPath = {{INSTALL_PATH_JSON}};
+  document.querySelector('#copy-path').addEventListener('click', async () => {
+    const status = document.querySelector('#copy-status');
+    try {
+      await navigator.clipboard.writeText(installPath);
+      status.textContent = 'Caminho copiado. Agora cole na janela de seleção de pasta.';
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(document.querySelector('#install-path'));
+      getSelection().removeAllRanges();
+      getSelection().addRange(range);
+      status.textContent = 'O caminho ficou selecionado. Pressione Ctrl+C.';
+    }
+  });
+</script>
+</body>
+</html>
