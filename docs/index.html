@@ -12,66 +12,70 @@
 <header><strong>Easy Notebook</strong><span id="counter">Instalação no Chrome</span></header>
 <progress id="progress" max="8" value="1" aria-label="Progresso do guia"></progress>
 <article>
-<section data-step>
+<!-- DOWNLOAD-STEPS-START -->
+<section data-step data-next="Já baixei →">
 <p class="where">Aqui neste guia</p><h1 tabindex="-1">Primeiro, baixe a extensão</h1>
 <p>Vamos instalar juntos. Você verá <strong>uma etapa de cada vez</strong> e avançará quando terminar.</p>
-<p><a class="action" id="download" href="https://github.com/Rambond123/easy-notebook/releases/download/v0.21.5/Easy-Notebook-0.21.5.zip">Baixar Easy Notebook</a></p>
-<p>O Chrome baixará um arquivo chamado <strong>Easy-Notebook-0.21.5.zip</strong>. Aguarde o download terminar.</p>
+<p><a class="action" id="download" href="https://github.com/Rambond123/easy-notebook/releases/download/v0.21.6/Easy-Notebook-0.21.6.zip">Baixar Easy Notebook</a></p>
+<p>O Chrome baixará um arquivo chamado <strong>Easy-Notebook-0.21.6.zip</strong>. Aguarde o download terminar.</p>
 <div class="tip">Já baixou esse arquivo? Pode seguir em <strong>Já baixei →</strong>.</div>
 <p class="help">Deixe este guia aberto para consultar as próximas etapas.</p>
 </section>
-<section data-step hidden>
+<section data-step data-next="Abriu a janela de extração →" hidden>
 <p class="where">Na pasta Downloads do Windows</p><h1 tabindex="-1">Clique com o botão direito no ZIP</h1>
-<ol><li>No Chrome, pressione <kbd>Ctrl</kbd> + <kbd>J</kbd> para ver os downloads.</li><li>Ao lado de <strong>Easy-Notebook-0.21.5.zip</strong>, clique no ícone de pasta (<strong>Mostrar na pasta</strong>).</li><li>Na janela que abriu, clique com o <strong>botão direito</strong> sobre o ZIP e escolha <strong>Extrair Tudo…</strong>.</li></ol>
-<div class="visual"><div class="caption">Referência visual • faça isso na janela do Windows</div><div class="mock stack"><span class="folder">📦 Easy-Notebook-0.21.5.zip</span><span><span class="mark">Extrair Tudo…</span></span><span class="arrow">↑ Escolha esta opção no menu do botão direito</span></div></div>
+<ol><li>No Chrome, pressione <kbd>Ctrl</kbd> + <kbd>J</kbd> para ver os downloads.</li><li>Ao lado de <strong>Easy-Notebook-0.21.6.zip</strong>, clique no ícone de pasta (<strong>Mostrar na pasta</strong>).</li><li>Na janela que abriu, clique com o <strong>botão direito</strong> sobre o ZIP e escolha <strong>Extrair Tudo…</strong>.</li></ol>
+<div class="visual"><div class="caption">Referência visual • faça isso na janela do Windows</div><div class="mock stack"><span class="folder">📦 Easy-Notebook-0.21.6.zip</span><span><span class="mark">Extrair Tudo…</span></span><span class="arrow">↑ Escolha esta opção no menu do botão direito</span></div></div>
 <p class="tip">Não precisa abrir nem escolher nenhum dos arquivos de código.</p>
 </section>
-<section data-step hidden>
+<section data-step data-next="Já extraí →" hidden>
 <p class="where">Na janela “Extrair Pastas Compactadas” do Windows</p><h1 tabindex="-1">Deixe em Downloads e clique em “Extrair”</h1>
 <p>Mantenha o local que o Windows já preencheu. Clique em <strong>Extrair</strong> e aguarde terminar.</p>
-<div class="visual"><div class="caption">Destino padrão • o Windows cria uma pasta com o nome do ZIP</div><div class="mock stack"><span>📁 Downloads</span><span style="padding-left:24px">📁 Easy-Notebook-0.21.5</span><span style="padding-left:48px">📁 Easy Notebook</span><span class="right mark">Extrair</span></div></div>
+<div class="visual"><div class="caption">Destino padrão • o Windows cria uma pasta com o nome do ZIP</div><div class="mock stack"><span>📁 Downloads</span><span style="padding-left:24px">📁 Easy-Notebook-0.21.6</span><span style="padding-left:48px">📁 Easy Notebook</span><span class="right mark">Extrair</span></div></div>
 <p class="tip">Guarde a pasta nesse lugar. O Chrome usará os arquivos dela sempre que a extensão funcionar.</p>
 </section>
-<section data-step hidden>
+<!-- DOWNLOAD-STEPS-END -->
+<section data-step data-next="Abri a tela de extensões →" hidden>
+<!-- INSTALL-HEADING -->
 <p class="where">Em uma nova guia do Chrome</p><h1 tabindex="-1">Abra a tela de extensões</h1>
 <p>Clique no botão abaixo para copiar o endereço:</p>
 <input id="address" value="chrome://extensions" readonly aria-label="Endereço da tela de extensões">
 <button id="copy" type="button">Copiar endereço</button><p class="status" id="copy-status" role="status"></p>
 <ol><li>Pressione <kbd>Ctrl</kbd> + <kbd>T</kbd> para abrir uma nova guia.</li><li>Cole com <kbd>Ctrl</kbd> + <kbd>V</kbd> na barra de endereço e pressione <kbd>Enter</kbd>.</li><li>Volte a este guia para ver o próximo passo.</li></ol>
 </section>
-<section data-step hidden>
+<section data-step data-next="Já ativei →" hidden>
 <p class="where">Na guia “Extensões” do Chrome</p><h1 tabindex="-1">Ative “Modo do desenvolvedor”</h1>
 <p>No <strong>canto superior direito</strong> da tela de extensões, clique na chave ao lado de <strong>Modo do desenvolvedor</strong>. Ela deve ficar ativada.</p>
 <div class="visual"><div class="caption">Referência visual • procure esta chave na outra guia do Chrome</div><div class="mock dark"><span>Extensões</span><span class="mark right">Modo do desenvolvedor <i class="switch"></i></span></div></div>
 <details><summary>A opção está bloqueada ou não aparece?</summary><p>Amplie a janela e confira o canto superior direito. Se o Chrome informar que a opção foi desativada pela organização, este método não consegue concluir a instalação nesse perfil.</p></details>
 </section>
-<section data-step hidden>
+<section data-step data-next="Abriu a seleção de pasta →" hidden>
 <p class="where">Ainda na guia “Extensões” do Chrome</p><h1 tabindex="-1">Clique em “Carregar sem compactação”</h1>
 <p>O botão aparece no <strong>canto superior esquerdo</strong>, depois de ativar o modo do desenvolvedor. Clique nele para escolher a pasta.</p>
 <div class="visual"><div class="caption">Referência visual • clique no botão da tela de extensões</div><div class="mock dark"><span class="mark">Carregar sem compactação</span><span class="dim">Compactar extensão</span><span class="dim">Atualizar</span></div></div>
 <p class="tip">Se estiver escrito <strong>Carregar expandida</strong>, é a mesma opção.</p>
 </section>
-<section data-step hidden>
+<section data-step data-next="Já selecionei a pasta →" hidden>
 <p class="where">Na janela de seleção de pasta que acabou de abrir</p><h1 tabindex="-1">Selecione a pasta Easy Notebook</h1>
-<ol><li>Na lateral da janela, clique em <strong>Downloads</strong>.</li><li>Abra a pasta <strong>Easy-Notebook-0.21.5</strong> que foi criada ao extrair e depois a pasta <strong>Easy Notebook</strong> dentro dela.</li><li>Clique em <strong>Selecionar pasta</strong>, na parte de baixo da janela.</li></ol>
-<div class="visual"><div class="caption">Referência visual • confira o nome da pasta antes de confirmar</div><div class="mock stack"><span>📁 Downloads &nbsp;›&nbsp; Easy-Notebook-0.21.5 &nbsp;›&nbsp; <strong>Easy Notebook</strong></span><span class="dim">Os arquivos podem não aparecer neste seletor. Isso é normal.</span><span class="right mark">Selecionar pasta</span></div></div>
+<ol><li>Na lateral da janela, clique em <strong>Downloads</strong>.</li><li>Abra a pasta <strong>Easy-Notebook-0.21.6</strong> que foi criada ao extrair e depois a pasta <strong>Easy Notebook</strong> dentro dela.</li><li>Clique em <strong>Selecionar pasta</strong>, na parte de baixo da janela.</li></ol>
+<div class="visual"><div class="caption">Referência visual • confira o nome da pasta antes de confirmar</div><div class="mock stack"><span>📁 Downloads &nbsp;›&nbsp; Easy-Notebook-0.21.6 &nbsp;›&nbsp; <strong>Easy Notebook</strong></span><span class="dim">Os arquivos podem não aparecer neste seletor. Isso é normal.</span><span class="right mark">Selecionar pasta</span></div></div>
 <details><summary>Minha pasta tem outro nome ou não está em Downloads</summary><p>Se baixou o ZIP mais de uma vez, a pasta pode terminar em <strong>(1)</strong> ou outro número. Abra a pasta criada na sua extração e, dentro dela, <strong>Easy Notebook</strong>. Se escolheu outro local para baixar, procure nesse local.</p></details>
-<details><summary>O Chrome diz que não encontrou o manifesto?</summary><p>Abra a pasta <strong>Easy Notebook</strong> que fica dentro da pasta extraída <strong>Easy-Notebook-0.21.5</strong>. É essa pasta interna que deve ser selecionada.</p></details>
+<details><summary>O Chrome diz que não encontrou o manifesto?</summary><p>Abra a pasta <strong>Easy Notebook</strong> que fica dentro da pasta extraída <strong>Easy-Notebook-0.21.6</strong>. É essa pasta interna que deve ser selecionada.</p></details>
 </section>
 <section data-step hidden>
 <p class="where">No Chrome</p><h1 tabindex="-1">Confira se apareceu “Easy Notebook”</h1>
 <p>A instalação deu certo se o cartão <strong>Easy Notebook</strong> apareceu na tela de extensões com a chave ativada.</p>
 <ol><li>O assistente da extensão deve abrir para configurar seu notebook. Siga as instruções dele.</li><li>Se não abrir, clique no ícone de <strong>quebra-cabeça</strong> ao lado da barra de endereços e escolha <strong>Easy Notebook</strong>.</li><li>Depois de configurar, atualize a página do eproc com <kbd>F5</kbd>.</li></ol>
-<p class="tip">Mantenha a pasta extraída <strong>Easy-Notebook-0.21.5</strong> em <strong>Downloads</strong>, com a pasta <strong>Easy Notebook</strong> dentro dela. O Chrome precisa desses arquivos. Você pode apagar apenas o arquivo <strong>.zip</strong>.</p>
+<p class="tip">Mantenha a pasta extraída <strong>Easy-Notebook-0.21.6</strong> em <strong>Downloads</strong>, com a pasta <strong>Easy Notebook</strong> dentro dela. O Chrome precisa desses arquivos. Você pode apagar apenas o arquivo <strong>.zip</strong>.</p>
 <p><strong>Pronto. Você pode fechar este guia.</strong></p>
 </section>
 <nav aria-label="Etapas da instalação"><button class="secondary" id="back" type="button">← Voltar</button><button id="next" type="button">Já baixei →</button></nav>
-<noscript><p>Ative o JavaScript para usar as etapas deste guia. O procedimento é: baixar o ZIP, extrair no local padrão em Downloads, abrir chrome://extensions, ativar Modo do desenvolvedor, clicar em Carregar sem compactação e escolher Downloads/Easy-Notebook-0.21.5/Easy Notebook.</p></noscript>
+<noscript><p>Ative o JavaScript para usar as etapas deste guia. O procedimento é: baixar o ZIP, extrair no local padrão em Downloads, abrir chrome://extensions, ativar Modo do desenvolvedor, clicar em Carregar sem compactação e escolher Downloads/Easy-Notebook-0.21.6/Easy Notebook.</p></noscript>
 </article>
-<footer>Guia 0.21.5 · Os destaques são referências visuais; os cliques de instalação são feitos no Windows e no Chrome.<br><a href="https://github.com/Rambond123/easy-notebook">Projeto Easy Notebook</a></footer>
+<footer>Guia 0.21.6 · Os destaques são referências visuais; os cliques de instalação são feitos no Windows e no Chrome.<br><a href="https://github.com/Rambond123/easy-notebook">Projeto Easy Notebook</a></footer>
 </main><script>
 const steps=[...document.querySelectorAll('[data-step]')];
-const labels=['Já baixei →','Abriu a janela de extração →','Já extraí →','Abri a tela de extensões →','Já ativei →','Abriu a seleção de pasta →','Já selecionei a pasta →'];
+const labels=steps.map(step=>step.dataset.next||'');
+document.querySelector('#progress').max=steps.length;
 let index=0;
 function show(value,focus=true){
   index=Math.max(0,Math.min(steps.length-1,value));
