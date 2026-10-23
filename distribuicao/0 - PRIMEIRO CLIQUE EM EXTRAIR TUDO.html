@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Primeiro extraia a Easy Notebook</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin:0; padding:32px 20px; background:#f4f7fb; color:#172033; font-family:Arial,sans-serif; }
+    main { max-width:850px; margin:auto; }
+    h1 { margin:0 0 8px; font-size:30px; }
+    .lead { color:#516078; font-size:18px; margin:0 0 24px; }
+    .window { overflow:hidden; border:1px solid #c8ced8; border-radius:14px; background:white; box-shadow:0 16px 45px #17203325; }
+    .titlebar { padding:13px 18px; background:#edf1f6; font-weight:700; }
+    .toolbar { display:flex; gap:10px; padding:22px; border-bottom:1px solid #d9dee7; }
+    .tool { padding:11px 17px; border-radius:8px; background:#eef1f5; color:#4a5568; }
+    .extract { position:relative; color:#7a3100; background:#fff1a8; border:3px solid #ffb300; font-weight:900; animation:pulse 1.1s infinite; }
+    .extract::after { content:"← CLIQUE AQUI"; position:absolute; left:calc(100% + 14px); white-space:nowrap; color:#d93025; }
+    @keyframes pulse { 50% { box-shadow:0 0 0 10px #ffb30035; transform:scale(1.03); } }
+    .files { padding:24px; line-height:2; }
+    .next { margin-top:24px; padding:20px; border-left:7px solid #0b57d0; background:white; border-radius:12px; font-size:18px; }
+    .next b { color:#0b57d0; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Primeiro, extraia o ZIP</h1>
+  <p class="lead">Na janela onde aparecem os arquivos da Easy Notebook, use o botão destacado abaixo.</p>
+  <section class="window">
+    <div class="titlebar">Easy-Notebook.zip</div>
+    <div class="toolbar">
+      <span class="tool">Novo</span><span class="tool">Copiar</span><span class="tool extract">Extrair tudo</span>
+    </div>
+    <div class="files">📄 0 - PRIMEIRO CLIQUE EM EXTRAIR TUDO<br>⚙️ 1 - INSTALAR EASY NOTEBOOK<br>📁 Arquivos Easy Notebook</div>
+  </section>
+  <div class="next">Depois que o Windows terminar a extração, abra a pasta extraída e dê dois cliques em <b>1 - INSTALAR EASY NOTEBOOK.cmd</b>.</div>
+</main>
+</body>
+</html>

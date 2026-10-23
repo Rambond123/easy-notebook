@@ -8,6 +8,7 @@ node_modules/
 .*-profile*/
 test-results/
 playwright-report/
+pacotes/
 *.log
 *.tmp
 

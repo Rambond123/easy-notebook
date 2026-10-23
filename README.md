@@ -93,12 +93,14 @@ O protocolo de upload é interno ao Notebook e pode mudar. Referência de pesqui
 
 ### Instalação guiada para usuários finais
 
-1. Baixe e extraia todo o ZIP da Easy Notebook.
-2. Execute **Instalar Easy Notebook.cmd**.
+1. Abra o ZIP e clique em **Extrair tudo**. Na raiz há somente um guia, o instalador e uma pasta com os arquivos internos.
+2. Na pasta extraída, execute **1 - INSTALAR EASY NOTEBOOK.cmd**.
 3. O instalador copia somente os arquivos necessários para a pasta Documentos do usuário atual, em `Eprocando\Easy Notebook`. O local é obtido do próprio Windows e funciona também quando Documentos está redirecionado para o OneDrive.
 4. O Chrome abre a tela de extensões e um guia visual. O caminho da pasta fica copiado para ser colado na janela de **Carregar sem compactação**.
 
 O Chrome exige que o próprio usuário ative o modo do desenvolvedor e confirme a pasta. Uma página comum não pode clicar nos controles de `chrome://extensions` nem instalar silenciosamente uma extensão fora da Chrome Web Store.
+
+O pacote público é gerado por `distribuicao/criar-pacote.ps1`. O instalador detecta a tentativa de execução diretamente de dentro do ZIP e orienta o usuário a extrair o conteúdo antes de continuar.
 
 ## Prompts
 

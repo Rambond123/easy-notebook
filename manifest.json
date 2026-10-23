@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Easy Notebook",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "description": "PDFs completos do eproc no Notebook, com configuração guiada e biblioteca de prompts.",
   "minimum_chrome_version": "120",
   "permissions": [
