@@ -1,3 +1,17 @@
+# Easy Notebook — instalar no Chrome
+
+## [▶ ABRIR O GUIA DE INSTALAÇÃO](https://Rambond123.github.io/easy-notebook/)
+
+**Para instalar ou enviar aos colegas, use o link acima.** Ele começa pelo download certo e mostra uma etapa por vez, com o botão procurado em destaque e a indicação da janela onde clicar.
+
+O guia explica como extrair para **Documentos → Eprocando** e escolher a pasta **Easy Notebook** no Chrome. Não usa instalador `.exe` ou `.cmd`.
+
+**Não use Code → Download ZIP nem Source code para instalar:** esses downloads contêm o projeto de desenvolvimento. O botão **Baixar Easy Notebook** dentro do guia entrega o pacote para usuários.
+
+O ZIP de instalação contém apenas `0 - COMECE AQUI.html` e a pasta `Easy Notebook`. Os arquivos da extensão ficam dentro dessa pasta; não é preciso abrir nenhum deles. O guia também funciona sem internet depois de extraído, exceto pelo download.
+
+---
+
 # Easy Notebook 0.20.3
 
 ## Estado de geração persistente
@@ -83,7 +97,7 @@ O envio só termina quando uma consulta ao Notebook confirma a fonte pelo identi
 
 O protocolo de upload é interno ao Notebook e pode mudar. Referência de pesquisa: [ScholarRelay](https://github.com/mahlernim/scholar-relay/blob/main/notebooklm-api.js) e [documentação de upload do notebooklm-mcp](https://github.com/yasinyuksel/notebooklm-mcp/blob/main/FILE_UPLOAD_IMPLEMENTATION.md). As notas de versões anteriores abaixo são históricas e não descrevem o fluxo atual.
 
-## Instalar
+## Instalar a partir do código (desenvolvimento)
 
 1. Abra `chrome://extensions` no Chrome normal.
 2. Ative **Modo do desenvolvedor** e clique em **Carregar sem compactação**.
@@ -93,14 +107,11 @@ O protocolo de upload é interno ao Notebook e pode mudar. Referência de pesqui
 
 ### Instalação guiada para usuários finais
 
-1. Abra o ZIP e clique em **Extrair tudo**. Na raiz aparecem apenas o guia `0 - COMECE AQUI.html` e a pasta `Easy Notebook`.
-2. Abra novamente o guia na pasta extraída. Ele mostra visualmente onde clicar e calcula o caminho da pasta da extensão.
-3. Abra `chrome://extensions`, ative **Modo do desenvolvedor** e clique em **Carregar sem compactação**.
-4. Cole o caminho fornecido pelo guia e selecione a pasta `Easy Notebook`.
+Envie o [guia de instalação](https://Rambond123.github.io/easy-notebook/) ao usuário. Ele oferece o download do pacote, orienta a extração para Documentos/Eprocando e acompanha cada ação no Chrome. Há um botão funcional para copiar o endereço da tela de extensões. As figuras são identificadas como referências visuais, não como botões que controlam o navegador.
 
 O Chrome exige que o próprio usuário ative o modo do desenvolvedor e confirme a pasta. Uma página comum não pode clicar nos controles de `chrome://extensions` nem instalar silenciosamente uma extensão fora da Chrome Web Store.
 
-O pacote público é gerado por `distribuicao/criar-pacote.ps1`. Ele não contém `.exe`, `.cmd`, `.bat` ou PowerShell: a instalação pública não executa programas e depende apenas dos controles do próprio Chrome.
+O pacote público é gerado por `distribuicao/criar-pacote.ps1`. O mesmo guia de `docs/index.html` é incluído na raiz do ZIP. O pacote não contém `.exe`, `.cmd`, `.bat` ou PowerShell. Para validar o guia no navegador: `node distribuicao/testar-guia.cjs` (Playwright instalado; ou informe seu diretório em `PLAYWRIGHT_MODULE`).
 
 ## Prompts
 
