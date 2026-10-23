@@ -12,6 +12,8 @@ section{position:absolute;right:0;bottom:calc(100% + 12px);width:360px;max-width
 button.action:hover{background:#e9f1ff;border-color:#bdd4f8}button.action.primary{width:100%;background:#2668db;color:#fff;border-color:#2668db;padding:13px 14px;font-size:13px;box-shadow:0 3px 9px #2668db20}button.action.primary:hover{background:#1555c3}
 #status{margin:14px 0 0;padding:12px 13px;border:1px solid #e3eaf4;border-radius:11px;background:#f7f9fc;font-size:12px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;color:#556984}
 #status[data-kind=success]{background:#f0f9f4;border-color:#d1e9da;color:#28714a}#status[data-kind=error]{background:#fff4f2;border-color:#f4d7d0;color:#ab4736}
+#status[data-kind=busy]{position:relative;background:#c9142f;border:2px solid #8f0017;color:#fff;font-size:14px;font-weight:800;line-height:1.45;letter-spacing:.15px;padding:15px 42px 15px 15px;box-shadow:0 5px 16px #a9002838}
+#status[data-kind=busy]::after{content:"";position:absolute;right:15px;top:50%;width:16px;height:16px;margin-top:-10px;border:3px solid #ffffff70;border-top-color:#fff;border-radius:50%;animation:easy-notebook-spin .8s linear infinite}@keyframes easy-notebook-spin{to{transform:rotate(360deg)}}
 .mode-note{font-size:11px;color:#96612d;background:#fff8ec;border:1px solid #f0e2c9;border-radius:8px;padding:9px 11px;margin:12px 0 0;line-height:1.5}
 #library:empty{display:none}#library{margin-top:18px}input{width:100%;border:1px solid #dce4f0;border-radius:10px;padding:11px 12px;color:#263b58;background:#fff;outline:none;font-size:12px}input:focus{border-color:#78a7f1;box-shadow:0 0 0 3px #3379e915}input::placeholder{color:#8b98aa}
 .prompt-list{margin-top:9px;max-height:260px;overflow:auto}.empty-state{text-align:center;color:#8492a6;line-height:1.6;padding:18px 10px;font-size:12px}
@@ -25,7 +27,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #8cb9ff;outline-off
 <section hidden aria-label="Painel Easy Notebook">
 <header class="panel-head"><img class="brand-icon" data-brand-icon alt=""><div class="brand-copy"><h2>Easy Notebook</h2><span class="subtitle" id="panel-subtitle">Do processo ao conhecimento</span></div><button class="icon-button" id="close" aria-label="Fechar painel" title="Fechar">×</button></header>
 <div class="panel-body"><p class="section-label" id="actions-label">Ações</p><div id="actions"></div><p class="mode-note" id="replace-mode" hidden>Limpeza ativada: as fontes atuais serão excluídas antes do envio.</p><p id="status" role="status" aria-live="polite"></p><div id="library"></div><details id="tools"><summary>Ferramentas do eproc</summary><div id="advanced-actions"></div></details></div>
-<footer class="panel-footer"><button id="config">Configurações</button><span class="version">v0.20</span></footer>
+<footer class="panel-footer"><button id="config">Configurações</button><span class="version">v0.20.2</span></footer>
 </section>
 <button id="toggle" aria-expanded="false"><img data-brand-icon alt=""><span>Easy Notebook</span></button>
 </aside>`;
