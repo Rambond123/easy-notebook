@@ -1,9 +1,10 @@
 (() => {
+  const isNotebook=/^(notebook|notebooklm)\.google\.com$/.test(location.hostname);
+  if(!isNotebook&&!globalThis.easyNotebookIsProcessPage(document,location.href))return;
   if(document.getElementById('easy-notebook-host'))return;
   const session=globalThis.easyNotebookSession();
   const localGet=keys=>session.call(()=>chrome.storage.local.get(keys));
   let uploadTimer;
-  const isNotebook=/^(notebook|notebooklm)\.google\.com$/.test(location.hostname);
   const host=document.createElement('div');host.id='easy-notebook-host';document.documentElement.append(host);
   const root=host.attachShadow({mode:'open'});
   root.innerHTML=globalThis.easyNotebookPanelMarkup;
@@ -11,7 +12,7 @@
   const $=id=>root.getElementById(id),section=root.querySelector('section');
   $('panel-subtitle').textContent=isNotebook?'Seus prompts, no lugar certo':'Do eproc direto para o Notebook';$('actions-label').textContent=isNotebook?'Biblioteca de prompts':'Enviar processo';$('tools').hidden=isNotebook;
   const status=text=>{if(!session.active())return; $('status').textContent=text;$('status').dataset.kind=/pronto para uso|PDF pronto|atualizados|Prompt inserido/i.test(text)?'success':/erro|falha|não foi|não confirmou|recusou|interrompido/i.test(text)?'error':'info';session.notify(()=>chrome.runtime.sendMessage({type:'FLOW_STATUS',text})); };
-  const rpc=async message=>{const result=await session.call(()=>chrome.runtime.sendMessage({...message,clientVersion:'0.20.0'}));if(result.error)throw Error(result.error);return result.value;};
+  const rpc=async message=>{const result=await session.call(()=>chrome.runtime.sendMessage({...message,clientVersion:chrome.runtime.getManifest().version}));if(result.error)throw Error(result.error);return result.value;};
   const panelPosition=globalThis.easyNotebookPositionPanel(root,session);
   session.onInvalid(()=>{
     clearInterval(uploadTimer);$('status').textContent=session.message;$('status').dataset.kind='error';section.hidden=false;$('toggle').setAttribute('aria-expanded','true');
