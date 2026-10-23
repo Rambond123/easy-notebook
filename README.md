@@ -1,3 +1,13 @@
+# Easy Notebook 0.20.1
+
+## Botão somente em processos individuais
+
+No eproc, a interface da extensão só é criada quando a página representa um processo individual. A capa do processo, a árvore e o leitor de documentos continuam atendidos. Localizadores, listas de processos, painéis, relatórios e páginas gerais do sistema não exibem o botão, mesmo quando a URL contém um número usado apenas como filtro.
+
+A identificação considera o número CNJ da URL e marcadores próprios das páginas de detalhes e documentos. No Google Notebook, a biblioteca de prompts continua disponível normalmente.
+
+---
+
 # Easy Notebook 0.19.4
 
 ## Atualização da extensão com abas abertas
