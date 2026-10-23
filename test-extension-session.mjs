@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+await import('./extension-session.js');
+const make=()=>{globalThis.chrome={runtime:{id:'test'}};return globalThis.easyNotebookSession();};
+let session=make(),stops=0,operations=0;session.onInvalid(()=>stops++);
+assert.equal(await session.call(()=>42),42);
+const unhandled=[];const capture=error=>unhandled.push(error);process.on('unhandledRejection',capture);
+session.notify(()=>{throw Error('Extension context invalidated.');});
+await new Promise(resolve=>setImmediate(resolve));assert.equal(stops,1);assert.equal(session.active(),false);
+await assert.rejects(session.call(()=>{operations++;}),/Atualize esta página/);assert.equal(operations,0);
+session.notify(()=>{operations++;});await new Promise(resolve=>setImmediate(resolve));assert.equal(operations,0);assert.equal(unhandled.length,0);
+session=make();await assert.rejects(session.call(()=>Promise.reject(Error('Extension context invalidated.'))),/Atualize esta página/);assert.equal(session.active(),false);
+session=make();await assert.rejects(session.call(()=>Promise.reject(Error('Network failure'))),/Network failure/);assert.equal(session.active(),true);
+session=make();chrome.runtime.id=undefined;assert.equal(session.active(),false);
+session=make();await assert.rejects(session.call(async()=>{chrome.runtime.id=undefined;return 42;}),/Atualize esta página/);
+process.removeListener('unhandledRejection',capture);
+console.log('Sessão: invalidação síncrona/assíncrona, perda do runtime e corrida durante chamada tratadas sem rejeições não capturadas; chamadas antigas interrompidas.');

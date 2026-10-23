@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {checkSetup,requireSetup,openWizard,openSettings} from './setup-controller.js';
+let settings={notebook:'https://notebook.google.com/notebook/existing?authuser=2'},tabs=[],created=0,updated=[],options=0;
+globalThis.chrome={storage:{local:{async get(){return {...settings};}}},runtime:{getURL:path=>'chrome-extension://test/'+path,async openOptionsPage(){options++;}},tabs:{async query(){return tabs;},async create(data){created++;const tab={id:created,url:data.url};tabs.push(tab);return tab;},async update(id,data){updated.push({id,...data});Object.assign(tabs.find(tab=>tab.id===id),data);}}};
+assert.equal((await checkSetup()).required,false);assert.equal(created,0,'Não abrir assistente para configuração válida já existente');await openSettings();assert.equal(options,1);
+settings.notebook='';await Promise.all([checkSetup(),checkSetup(),checkSetup()]);assert.equal(created,1,'Pedidos concorrentes abrem somente uma guia');assert.equal(tabs[0].url,'chrome-extension://test/wizard.html?reason=incomplete');
+await assert.rejects(requireSetup(),/concluir a configuração/);assert.equal(created,1);assert(updated.some(item=>item.active===true));
+tabs[0].url+='&view=finish#done';await checkSetup();assert.equal(tabs[0].url,'chrome-extension://test/wizard.html?reason=incomplete','Reabrir uma tela de conclusão antiga em modo reparação');
+settings.notebook='https://notebook.google.com/notebook/existing?authuser=2';await openWizard('manual');assert.equal(created,1);assert.equal(settings.notebook,'https://notebook.google.com/notebook/existing?authuser=2');
+console.log('Assistente: configuração válida preservada, reparação automática, guia única e bloqueio de envio sem destino.');

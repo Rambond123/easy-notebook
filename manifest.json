@@ -1,0 +1,76 @@
+{
+  "manifest_version": 3,
+  "name": "Easy Notebook",
+  "version": "0.20.0",
+  "description": "PDFs completos do eproc no Notebook, com configuração guiada e biblioteca de prompts.",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://eproc.trf4.jus.br/*",
+    "https://eproc.jfrs.jus.br/*",
+    "https://eproc.jfsc.jus.br/*",
+    "https://eproc.jfpr.jus.br/*",
+    "https://notebook.google.com/*",
+    "https://notebooklm.google.com/*",
+    "https://www.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Easy Notebook",
+    "default_icon": {
+      "16": "icons/notebook-16.png",
+      "32": "icons/notebook-32.png",
+      "128": "icons/notebook-180.png"
+    }
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://notebook.google.com/*",
+        "https://notebooklm.google.com/*",
+        "https://eproc.trf4.jus.br/*",
+        "https://eproc.jfrs.jus.br/*",
+        "https://eproc.jfsc.jus.br/*",
+        "https://eproc.jfpr.jus.br/*"
+      ],
+      "js": [
+        "extension-session.js",
+        "eproc-capture.js",
+        "panel-ui.js",
+        "panel-position.js",
+        "eproc-toolbar.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/notebook-16.png",
+    "32": "icons/notebook-32.png",
+    "128": "icons/notebook-180.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/notebook.svg"
+      ],
+      "matches": [
+        "https://notebook.google.com/*",
+        "https://notebooklm.google.com/*",
+        "https://eproc.trf4.jus.br/*",
+        "https://eproc.jfrs.jus.br/*",
+        "https://eproc.jfsc.jus.br/*",
+        "https://eproc.jfpr.jus.br/*"
+      ]
+    }
+  ]
+}

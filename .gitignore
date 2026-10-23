@@ -1,0 +1,18 @@
+# Dependencias e configuracoes locais
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Perfis e artefatos dos testes de navegador
+.*-profile*/
+test-results/
+playwright-report/
+*.log
+*.tmp
+
+# Arquivos do sistema e do editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
