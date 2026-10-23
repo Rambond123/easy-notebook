@@ -4,7 +4,7 @@
 
 **Para instalar ou enviar aos colegas, use o link acima.** Ele começa pelo download certo e mostra uma etapa por vez, com o botão procurado em destaque e a indicação da janela onde clicar.
 
-O guia explica como extrair para **Documentos → Eprocando** e escolher a pasta **Easy Notebook** no Chrome. Não usa instalador `.exe` ou `.cmd`.
+O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.21.4 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
 
 **Não use Code → Download ZIP nem Source code para instalar:** esses downloads contêm o projeto de desenvolvimento. O botão **Baixar Easy Notebook** dentro do guia entrega o pacote para usuários.
 
@@ -107,7 +107,7 @@ O protocolo de upload é interno ao Notebook e pode mudar. Referência de pesqui
 
 ### Instalação guiada para usuários finais
 
-Envie o [guia de instalação](https://Rambond123.github.io/easy-notebook/) ao usuário. Ele oferece o download do pacote, orienta a extração para Documentos/Eprocando e acompanha cada ação no Chrome. Há um botão funcional para copiar o endereço da tela de extensões. As figuras são identificadas como referências visuais, não como botões que controlam o navegador.
+Envie o [guia de instalação](https://Rambond123.github.io/easy-notebook/) ao usuário. Ele oferece o download do pacote, orienta a manter a extração padrão em Downloads e acompanha cada ação no Chrome. Há um botão funcional para copiar o endereço da tela de extensões. As figuras são identificadas como referências visuais, não como botões que controlam o navegador.
 
 O Chrome exige que o próprio usuário ative o modo do desenvolvedor e confirme a pasta. Uma página comum não pode clicar nos controles de `chrome://extensions` nem instalar silenciosamente uma extensão fora da Chrome Web Store.
 
