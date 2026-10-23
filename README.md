@@ -4,11 +4,11 @@
 
 **Para instalar ou enviar aos colegas, use o link acima.** Ele começa pelo download certo e mostra uma etapa por vez, com o botão procurado em destaque e a indicação da janela onde clicar.
 
-O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.21.5 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
+O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.21.6 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
 
 **Não use Code → Download ZIP nem Source code para instalar:** esses downloads contêm o projeto de desenvolvimento. O botão **Baixar Easy Notebook** dentro do guia entrega o pacote para usuários.
 
-O ZIP de instalação contém somente a pasta `Easy Notebook`, com os arquivos necessários à extensão. Não é preciso abrir nenhum deles. As orientações de instalação ficam exclusivamente no site.
+O ZIP de instalação contém `1 - INSTALAR NO CHROME.html` e a pasta `Easy Notebook`. Depois de extrair, abra esse HTML: ele começa diretamente na instalação no Chrome, sem repetir download e extração. Os arquivos de código ficam dentro da pasta Easy Notebook e não precisam ser abertos.
 
 ---
 
@@ -111,7 +111,7 @@ Envie o [guia de instalação](https://Rambond123.github.io/easy-notebook/) ao u
 
 O Chrome exige que o próprio usuário ative o modo do desenvolvedor e confirme a pasta. Uma página comum não pode clicar nos controles de `chrome://extensions` nem instalar silenciosamente uma extensão fora da Chrome Web Store.
 
-O pacote público é gerado por `distribuicao/criar-pacote.ps1`. O guia de `docs/index.html` é publicado somente no site e não entra no ZIP. O pacote não contém `.exe`, `.cmd`, `.bat` ou PowerShell. Para validar o guia no navegador: `node distribuicao/testar-guia.cjs` (Playwright instalado; ou informe seu diretório em `PLAYWRIGHT_MODULE`).
+O pacote público é gerado por `distribuicao/criar-pacote.ps1`. O guia local é derivado de `docs/index.html`, excluindo as três etapas anteriores à instalação, inclusive da navegação Voltar. O pacote não contém `.exe`, `.cmd`, `.bat` ou PowerShell. Para validar o guia no navegador: `node distribuicao/testar-guia.cjs` (Playwright instalado; ou informe seu diretório em `PLAYWRIGHT_MODULE`). Para validar o HTML extraído do ZIP, informe seu caminho em `GUIDE_FILE`.
 
 ## Prompts
 

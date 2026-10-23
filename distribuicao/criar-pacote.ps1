@@ -38,6 +38,18 @@ if (Test-Path -LiteralPath $zipPath) { Remove-Item -LiteralPath $zipPath -Force 
 New-Item -ItemType Directory -Path $payloadDir -Force | Out-Null
 
 try {
+    # Quem abre o HTML extraído já concluiu download e extração.
+    # Gere o guia local com somente as etapas de instalação do mesmo site.
+    $guide = [IO.File]::ReadAllText((Join-Path $repoDir 'docs/index.html'))
+    if ($guide -notmatch '<!-- DOWNLOAD-STEPS-START -->' -or $guide -notmatch '<!-- DOWNLOAD-STEPS-END -->') {
+        throw 'Não foi possível separar as etapas de download do guia.'
+    }
+    $guide = [regex]::Replace($guide, '(?s)<!-- DOWNLOAD-STEPS-START -->.*?<!-- DOWNLOAD-STEPS-END -->', '')
+    $guide = $guide.Replace('<!-- INSTALL-HEADING -->', '<p class="tip">Você já extraiu os arquivos. Agora vamos instalar a extensão no Chrome.</p>')
+    $guide = [regex]::Replace($guide, '(?s)<noscript>.*?</noscript>', '<noscript><p>No Chrome, abra chrome://extensions, ative Modo do desenvolvedor e clique em Carregar sem compactação. Selecione a pasta Easy Notebook que está ao lado deste arquivo.</p></noscript>')
+    $guide = $guide.Replace('Já baixei →', 'Abri a tela de extensões →')
+    [IO.File]::WriteAllText((Join-Path $stageDir '1 - INSTALAR NO CHROME.html'), $guide, [Text.UTF8Encoding]::new($false))
+
     foreach ($relativePath in $runtimeFiles) {
         Copy-Item -LiteralPath (Join-Path $repoDir $relativePath) -Destination (Join-Path $payloadDir $relativePath)
     }
