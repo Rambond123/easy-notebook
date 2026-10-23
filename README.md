@@ -1,3 +1,11 @@
+# Easy Notebook 0.20.3
+
+## Estado de geração persistente
+
+O painel agora controla a geração pelo estado real da tarefa. Mensagens intermediárias de captura e transferência não fazem o botão **Enviar processo ao Notebook** reaparecer. Ele permanece oculto durante toda a geração e, após a captura bem-sucedida, o painel mostra **Geração concluída**. Em caso de falha, o estado é encerrado e o botão volta para permitir nova tentativa.
+
+---
+
 # Easy Notebook 0.20.2
 
 ## Aviso de geração na árvore
