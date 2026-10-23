@@ -17,6 +17,11 @@ $stageDir = Join-Path $outputDir ".stage-$version"
 $zipPath = Join-Path $outputDir "Easy-Notebook-$version.zip"
 $payloadDir = Join-Path $stageDir 'Easy Notebook'
 
+# Confirme o limite antes de limpar a pasta temporária de empacotamento.
+if ([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($stageDir)) -ne $outputDir) {
+    throw 'A pasta temporária deve estar dentro da pasta de saída.'
+}
+
 $runtimeFiles = @(
     'background.js', 'configuration.js', 'content.js', 'db.js',
     'direct-upload-controller.js', 'drive.js', 'eproc-capture.js',
@@ -33,7 +38,7 @@ if (Test-Path -LiteralPath $zipPath) { Remove-Item -LiteralPath $zipPath -Force 
 New-Item -ItemType Directory -Path $payloadDir -Force | Out-Null
 
 try {
-    Copy-Item -LiteralPath (Join-Path $PSScriptRoot '0 - COMECE AQUI.html') -Destination $stageDir
+    Copy-Item -LiteralPath (Join-Path $repoDir 'docs/index.html') -Destination (Join-Path $stageDir '0 - COMECE AQUI.html')
 
     foreach ($relativePath in $runtimeFiles) {
         Copy-Item -LiteralPath (Join-Path $repoDir $relativePath) -Destination (Join-Path $payloadDir $relativePath)
