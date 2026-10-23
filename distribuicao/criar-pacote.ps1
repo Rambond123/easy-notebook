@@ -38,8 +38,6 @@ if (Test-Path -LiteralPath $zipPath) { Remove-Item -LiteralPath $zipPath -Force 
 New-Item -ItemType Directory -Path $payloadDir -Force | Out-Null
 
 try {
-    Copy-Item -LiteralPath (Join-Path $repoDir 'docs/index.html') -Destination (Join-Path $stageDir '0 - COMECE AQUI.html')
-
     foreach ($relativePath in $runtimeFiles) {
         Copy-Item -LiteralPath (Join-Path $repoDir $relativePath) -Destination (Join-Path $payloadDir $relativePath)
     }

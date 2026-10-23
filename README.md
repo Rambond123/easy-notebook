@@ -4,11 +4,11 @@
 
 **Para instalar ou enviar aos colegas, use o link acima.** Ele começa pelo download certo e mostra uma etapa por vez, com o botão procurado em destaque e a indicação da janela onde clicar.
 
-O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.21.4 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
+O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.21.5 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
 
 **Não use Code → Download ZIP nem Source code para instalar:** esses downloads contêm o projeto de desenvolvimento. O botão **Baixar Easy Notebook** dentro do guia entrega o pacote para usuários.
 
-O ZIP de instalação contém apenas `0 - COMECE AQUI.html` e a pasta `Easy Notebook`. Os arquivos da extensão ficam dentro dessa pasta; não é preciso abrir nenhum deles. O guia também funciona sem internet depois de extraído, exceto pelo download.
+O ZIP de instalação contém somente a pasta `Easy Notebook`, com os arquivos necessários à extensão. Não é preciso abrir nenhum deles. As orientações de instalação ficam exclusivamente no site.
 
 ---
 
