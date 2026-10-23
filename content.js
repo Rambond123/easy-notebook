@@ -11,7 +11,7 @@
   for(const image of root.querySelectorAll('[data-brand-icon]'))image.src=chrome.runtime.getURL('icons/notebook.svg');
   const $=id=>root.getElementById(id),section=root.querySelector('section');
   $('panel-subtitle').textContent=isNotebook?'Seus prompts, no lugar certo':'Do eproc direto para o Notebook';$('actions-label').textContent=isNotebook?'Biblioteca de prompts':'Enviar processo';$('tools').hidden=isNotebook;
-  const status=text=>{if(!session.active())return; $('status').textContent=text;$('status').dataset.kind=/pronto para uso|PDF pronto|atualizados|Prompt inserido/i.test(text)?'success':/erro|falha|não foi|não confirmou|recusou|interrompido/i.test(text)?'error':'info';session.notify(()=>chrome.runtime.sendMessage({type:'FLOW_STATUS',text})); };
+  const status=text=>{if(!session.active())return;const kind=/^AGUARDE\b/i.test(text)?'busy':/pronto para uso|PDF pronto|atualizados|Prompt inserido/i.test(text)?'success':/erro|falha|não foi|não confirmou|recusou|interrompido/i.test(text)?'error':'info';$('status').textContent=text;$('status').dataset.kind=kind;section.toggleAttribute('aria-busy',kind==='busy');if(!isNotebook){const busy=kind==='busy';$('actions').hidden=busy;$('actions-label').textContent=busy?'Geração em andamento':'Enviar processo';}session.notify(()=>chrome.runtime.sendMessage({type:'FLOW_STATUS',text})); };
   const rpc=async message=>{const result=await session.call(()=>chrome.runtime.sendMessage({...message,clientVersion:chrome.runtime.getManifest().version}));if(result.error)throw Error(result.error);return result.value;};
   const panelPosition=globalThis.easyNotebookPositionPanel(root,session);
   session.onInvalid(()=>{
@@ -80,7 +80,7 @@
       let stopWatching=()=>{};
       try{
         if(!document.querySelector('#ifrLeitorPdf')&&!document.querySelector('#divArvore')){await openTree();return;}
-        status('Marcando todos os documentos e gerando a versão completa para impressão…');
+        status('AGUARDE — gerando o PDF completo.\nNão é necessário clicar novamente. Selecionando todos os documentos…');
         const previousPDF=document.querySelector('#ifrLeitorPdf')?.src;
         let readerReloaded=false;
         const onReaderLoad=event=>{if(event.target?.id==='ifrLeitorPdf')readerReloaded=true;};
@@ -89,9 +89,9 @@
         document.addEventListener('load',onReaderLoad,true);
         stopWatching=()=>{observer.disconnect();document.removeEventListener('load',onReaderLoad,true);};
         await selectAll();
-        status('Marcar todos acionado. Solicitando a versão para impressão…');
+        status('AGUARDE — documentos selecionados.\nNão é necessário clicar novamente. Solicitando o PDF completo ao eproc…');
         await rpc({type:'GENERATE_PDF',printOnly:true});
-        status('Versão para impressão acionada. Aguardando o PDF…');
+        status('AGUARDE — o eproc está montando o PDF completo.\nNão é necessário clicar novamente.');
         const deadline=Date.now()+180000;let url;
         while(Date.now()<deadline){
           if(!session.active())throw Error(session.message);
@@ -100,7 +100,7 @@
           await new Promise(resolve=>setTimeout(resolve,800));
         }
         if(!url)throw Error('Não detectei a atualização do leitor em 3 minutos. Se o PDF completo já estiver à direita, use Capturar PDF já gerado; se ainda aparecer um documento individual, a geração não atualizou o leitor.');
-        status('PDF completo identificado. Iniciando captura e transferência…');
+        status('AGUARDE — PDF completo identificado.\nNão é necessário clicar novamente. Preparando a transferência…');
         await globalThis.easyNotebookCapturePDF(url,{rpc,report:status});
       }catch(e){status(e.message);}finally{stopWatching();running=false;}
     }
@@ -117,7 +117,7 @@
     button('Marcar todos',async()=>{await selectAll();status('Clique em Marcar todos realizado.');});
     button('Versão p/ impressão',async()=>{await rpc({type:'GENERATE_PDF'});status('Marcar todos e Versão p/ impressão acionados. Aguardando o PDF…');});
     button('Capturar PDF já gerado',async()=>{const frame=document.querySelector('#ifrLeitorPdf');if(!frame){await openTree();return;}const u=new URL(frame.src,location.href);if(u.searchParams.get('acao')!=='download_documento_unificado'){await sendProcess();return;}await globalThis.easyNotebookCapturePDF(u.href,{rpc,report:status});});
-    rpc({type:'TREE_JOB'}).then(async job=>{if(!job)return;showPanel(true);status('Árvore aberta. Aguardando os controles de seleção…');const deadline=Date.now()+25000;while(session.active()&&!document.querySelector('#divOpcoesDocumentos')&&Date.now()<deadline)await new Promise(r=>setTimeout(r,300));if(!session.active())return;if(!document.querySelector('#divOpcoesDocumentos')){status('A árvore ainda não ficou pronta. A tarefa foi preservada; atualize esta aba para retomar.');return;}const claimed=await rpc({type:'TREE_JOB',ready:true});if(claimed)await sendProcess();}).catch(e=>{showPanel(true);status('Não foi possível continuar na árvore: '+e.message);});
+    rpc({type:'TREE_JOB'}).then(async job=>{if(!job)return;showPanel(true);status('AGUARDE — gerando o PDF completo.\nNão é necessário clicar novamente. Preparando a árvore de documentos…');const deadline=Date.now()+25000;while(session.active()&&!document.querySelector('#divOpcoesDocumentos')&&Date.now()<deadline)await new Promise(r=>setTimeout(r,300));if(!session.active())return;if(!document.querySelector('#divOpcoesDocumentos')){status('A árvore ainda não ficou pronta. A tarefa foi preservada; atualize esta aba para retomar.');return;}const claimed=await rpc({type:'TREE_JOB',ready:true});if(claimed)await sendProcess();}).catch(e=>{showPanel(true);status('Não foi possível continuar na árvore: '+e.message);});
   }
 })();
 

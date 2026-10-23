@@ -1,3 +1,13 @@
+# Easy Notebook 0.20.2
+
+## Aviso de geração na árvore
+
+Durante a geração automática na árvore de documentos, o painel permanece aberto com o aviso **AGUARDE — gerando o PDF completo**. O aviso usa fundo vermelho forte, texto branco e indicador de atividade. A mensagem informa que não é necessário clicar novamente e acompanha as etapas de seleção dos documentos, montagem do PDF pelo eproc e preparação da transferência.
+
+Enquanto a geração estiver em andamento, o botão **Enviar processo ao Notebook** fica oculto e o título da área muda para **Geração em andamento**. Se houver falha, o botão volta a aparecer para permitir uma nova tentativa.
+
+---
+
 # Easy Notebook 0.20.1
 
 ## Botão somente em processos individuais
