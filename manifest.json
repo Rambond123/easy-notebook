@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Easy Notebook",
-  "version": "0.21.6",
+  "version": "0.22.0",
   "description": "PDFs completos do eproc no Notebook, com configuração guiada e biblioteca de prompts.",
   "minimum_chrome_version": "120",
   "permissions": [
@@ -16,8 +16,7 @@
     "https://eproc.jfsc.jus.br/*",
     "https://eproc.jfpr.jus.br/*",
     "https://notebook.google.com/*",
-    "https://notebooklm.google.com/*",
-    "https://www.googleapis.com/*"
+    "https://notebooklm.google.com/*"
   ],
   "background": {
     "service_worker": "background.js",

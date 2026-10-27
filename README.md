@@ -4,7 +4,7 @@
 
 **Para instalar ou enviar aos colegas, use o link acima.** Ele começa pelo download certo e mostra uma etapa por vez, com o botão procurado em destaque e a indicação da janela onde clicar.
 
-O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.21.6 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
+O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.22.0 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
 
 **Não use Code → Download ZIP nem Source code para instalar:** esses downloads contêm o projeto de desenvolvimento. O botão **Baixar Easy Notebook** dentro do guia entrega o pacote para usuários.
 
@@ -117,9 +117,13 @@ O pacote público é gerado por `distribuicao/criar-pacote.ps1`. O guia local é
 
 O botão flutuante Easy Notebook abre a biblioteca. Cadastre prompts locais na configuração. **Usar** preenche a conversa e não envia a pergunta. Abra a aba Chat antes de inserir.
 
-Para Drive, informe a pasta compartilhada para leitura e uma chave de API com Google Drive API ativada. Use um arquivo `.txt` ou `.md` por prompt. Google Docs ainda não é aceito nesta versão. A chave fica no armazenamento local da extensão; restrinja-a à API do Drive e defina cotas no Google Cloud.
+Nas **Configurações → Importar prompts da Gaia**, escolha a guia do eproc com a biblioteca de prompts aberta e clique em **Buscar prompts**. Pesquise por título, descrição ou autor; marque os textos desejados e clique em **Importar selecionados**. **Ver texto** abre uma prévia do conteúdo completo e da versão antes da importação.
 
-**Atualizar prompts** busca a biblioteca diretamente no painel. **Abrir pasta no Drive** abre a pasta para edição. A atualização só substitui a biblioteca quando todos os arquivos são recebidos. Uma pasta vazia mantém a biblioteca anterior. Prompts locais são preservados. O conteúdo remoto é tratado como texto, nunca como código.
+Os textos ficam salvos no navegador e aparecem no painel do Notebook. Importar novamente o mesmo identificador, na mesma origem do eproc, atualiza sua cópia; títulos iguais com identificadores diferentes continuam separados. A importação só grava depois que todos os textos escolhidos foram lidos. Falhas preservam a biblioteca anterior. Remover na extensão não exclui nada na Gaia.
+
+Não é necessário configurar Drive, chave de API ou auxiliar local. Prompts locais e textos importados anteriormente do Drive são preservados. Os textos são exibidos e inseridos no chat; nunca são executados como código. A extensão não executa prompts nem altera a biblioteca da Gaia. A conta do eproc precisa estar autenticada no mesmo navegador/perfil da extensão.
+
+A leitura foi conferida no modal de prompts da Gaia. A extensão também procura o link existente da biblioteca no menu, sem fabricar endereços assinados; se não o encontrar, pede que você abra a biblioteca no eproc. O acesso direto pelo menu pode variar entre instalações do eproc.
 
 ## PDF do eproc
 

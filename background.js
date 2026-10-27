@@ -1,5 +1,5 @@
 import {fileOperation} from './db.js';
-import {syncDrive} from './drive.js';
+
 import {directUpload} from './direct-upload-controller.js';
 import './eproc-generation.js';
 import {notebookURL} from './configuration.js';
@@ -62,7 +62,7 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
     if(message.type==='CHECK_SETUP')return checkSetup({focus:message.focus===true});
     if(message.type==='OPEN_SETUP')return openWizard('manual');
     if (message.type === 'OPTIONS') return openSettings();
-    if (message.type === 'SYNC_DRIVE') return {count:await syncDrive()};
+
     if (message.type === 'START_TREE') {
       const url = new URL(message.url);
       const actions = ['arvore_documento_listar','processo_consultar_arvore_sistema_externo'];
