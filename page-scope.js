@@ -4,6 +4,11 @@ globalThis.easyNotebookIsProcessPage=function(doc=document,href=location.href){
   try{url=new URL(href);}catch{return false;}
   const action=url.searchParams.get('acao')||'';
 
+  // The editor may retain a process number in its URL, but sending the
+  // process from a draft is both confusing and outside the intended flow.
+  if(/(?:minuta|documento.*(?:editar|redigir)|editor|editar.*documento)/i.test(action))return false;
+  if(doc.querySelector('#frmEditorMinuta,#divEditorMinuta,.editor-minuta,[data-editor-minuta]'))return false;
+
   // Listing and management routes can contain a process number as a filter.
   if(/(?:^|_)(?:localizador|lista|painel|relatorio)(?:_|$)/i.test(action))return false;
 

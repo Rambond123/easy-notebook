@@ -16,6 +16,9 @@ assert.equal(isProcess(doc(),'https://eproc.jfrs.jus.br/eprocV2/controlador.php?
 assert.equal(isProcess(doc({selectors:['#divArvore']}),'https://eproc.jfrs.jus.br/eprocV2/controlador.php?acao=arvore_documento_listar'),true);
 assert.equal(isProcess(doc({headings:['Consulta Processual - Detalhes do Processo']}),'https://eproc.trf4.jus.br/eproc2trf4/controlador.php?acao=processo_consultar'),true);
 assert.equal(isProcess(doc({selectors:['#divRelacionados']}),'https://eproc.trf4.jus.br/eproc2trf4/controlador.php?acao=processo_selecionar'),true);
+assert.equal(isProcess(doc(),'https://eproc.trf4.jus.br/eproc2trf4/controlador.php?acao=minuta_editar&num_processo=50545731720254047100'),false);
+assert.equal(isProcess(doc(),'https://eproc.trf4.jus.br/eproc2trf4/controlador.php?acao=documento_editar&num_processo=50545731720254047100'),false);
+assert.equal(isProcess(doc({selectors:['#frmEditorMinuta']}),'https://eproc.trf4.jus.br/eproc2trf4/controlador.php?acao=processo_selecionar&num_processo=50545731720254047100'),false);
 
 assert.equal(isProcess(doc(),'https://eproc.jfrs.jus.br/eprocV2/controlador.php?acao=localizador_processos_lista'),false);
 assert.equal(isProcess(doc(),'https://eproc.jfrs.jus.br/eprocV2/controlador.php?acao=localizador_processos_lista&num_processo=50545731720254047100'),false);
