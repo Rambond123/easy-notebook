@@ -27,7 +27,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #8cb9ff;outline-off
 <section hidden aria-label="Painel Easy Notebook">
 <header class="panel-head"><img class="brand-icon" data-brand-icon alt=""><div class="brand-copy"><h2>Easy Notebook</h2><span class="subtitle" id="panel-subtitle">Do processo ao conhecimento</span></div><button class="icon-button" id="close" aria-label="Fechar painel" title="Fechar">×</button></header>
 <div class="panel-body"><p class="section-label" id="actions-label">Ações</p><div id="actions"></div><p class="mode-note" id="replace-mode" hidden>Limpeza ativada: as fontes atuais serão excluídas antes do envio.</p><p id="status" role="status" aria-live="polite"></p><div id="library"></div><details id="tools"><summary>Ferramentas do eproc</summary><div id="advanced-actions"></div></details></div>
-<footer class="panel-footer"><button id="config">Configurações</button><span class="version">v0.22.1</span></footer>
+<footer class="panel-footer"><button id="config">Configurações</button><span class="version">v0.22.2</span></footer>
 </section>
 <button id="toggle" aria-expanded="false"><img data-brand-icon alt=""><span>Easy Notebook</span></button>
 </aside>`;

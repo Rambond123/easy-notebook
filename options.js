@@ -1,6 +1,7 @@
 import {notebookURL} from './configuration.js';
 import {setupGaiaOptions} from './gaia-options.js';
 const $=id=>document.getElementById(id),report=text=>$('status').textContent=text;
+const guideURL='https://rambond123.github.io/easy-notebook/?v='+(chrome.runtime.getManifest?.().version||'atual');
 async function render(){
   const saved=await chrome.storage.local.get(['localPrompts','gaiaPrompts','drivePrompts']);$('prompts').replaceChildren();
   for(const [key,label] of [['localPrompts','local'],['gaiaPrompts','Gaia'],['drivePrompts','Drive — importação anterior']])for(const prompt of saved[key]||[]){
@@ -17,6 +18,14 @@ for(const id of ['save','add'])$(id).onclick=async()=>{try{
 const settings=await chrome.storage.local.get(['notebook','replaceSources']);$('notebook').value=settings.notebook||'';$('replaceSources').checked=settings.replaceSources===true;
 await render();await setupGaiaOptions(render);
 $('downloads').onclick=()=>chrome.downloads.showDefaultFolder();
+$('guide').href=guideURL;
+$('shareGuide').onclick=async()=>{try{
+  if(typeof navigator.share==='function'){await navigator.share({title:'Easy Notebook',text:'Instale a extensão Easy Notebook pelo guia atualizado.',url:guideURL});report('Janela de compartilhamento aberta.');return;}
+  await navigator.clipboard.writeText(guideURL);report('Link do guia copiado. Agora você pode colar e enviar aos colegas.');
+}catch(error){
+  if(error?.name==='AbortError'){report('Compartilhamento cancelado.');return;}
+  report('Use este link para compartilhar: '+guideURL);
+}};
 async function showFlow(){const {flowStatus,flowUpdated}=await chrome.storage.local.get(['flowStatus','flowUpdated']);$('flow-status').textContent=flowStatus?(flowUpdated?new Date(flowUpdated).toLocaleTimeString()+' — ':'')+flowStatus:'Nenhum andamento registrado.';}
 await showFlow();
 chrome.storage.onChanged?.addListener((changes,area)=>{if(area==='local'&&(changes.flowStatus||changes.flowUpdated))showFlow();});
