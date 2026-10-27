@@ -32,8 +32,40 @@
   function conversation(){return [...document.querySelectorAll('textarea,[contenteditable="true"],input[aria-label]')].find(el=>visible(el)&&/Caixa de consulta|query box|Faça uma pergunta|Ask|Start typing/i.test([el.getAttribute('aria-label'),el.getAttribute('placeholder'),el.getAttribute('data-placeholder')].join(' ')));}
   function insert(text){const el=conversation();if(!el)throw Error('Abra a aba Chat para inserir o prompt.');el.focus();if(el instanceof HTMLTextAreaElement || el instanceof HTMLInputElement){const proto=el instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;Object.getOwnPropertyDescriptor(proto,'value').set.call(el,text);}else{el.textContent=text;}el.dispatchEvent(new InputEvent('input',{bubbles:true,inputType:'insertText',data:text}));el.dispatchEvent(new Event('change',{bubbles:true}));status('Prompt inserido. Revise o texto e clique em Enviar no notebook.');}
   async function library(){const {localPrompts=[],gaiaPrompts=[],drivePrompts=[]}=await localGet(['localPrompts','gaiaPrompts','drivePrompts']);$('library').replaceChildren();const search=document.createElement('input');search.placeholder='Buscar prompt';search.setAttribute('aria-label','Buscar prompt');$('library').append(search);const list=document.createElement('div');list.className='prompt-list';$('library').append(list);const draw=()=>{list.replaceChildren();for(const p of [...localPrompts,...gaiaPrompts,...drivePrompts].filter(p=>p.title.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))){const article=document.createElement('article'),title=document.createElement('strong'),use=document.createElement('button');title.textContent=p.title;use.textContent='Usar';use.onclick=()=>{try{insert(p.body);}catch(e){status(e.message);}};const details=document.createElement('details'),summary=document.createElement('summary'),preview=document.createElement('p');summary.textContent='Ver texto';preview.textContent=p.body;details.append(summary,preview);article.append(title,use,details);list.append(article);}};search.oninput=draw;draw();if(!localPrompts.length&&!gaiaPrompts.length&&!drivePrompts.length){const empty=document.createElement('p');empty.className='empty-state';empty.textContent='Importe prompts da Gaia ou cadastre seus textos nas Configurações.';list.append(empty);}}
+  function inlinePrompts(){
+    let inline;
+    const place=()=>{
+      if(!session.active())return;
+      const field=conversation();if(!field)return;
+      const rect=field.getBoundingClientRect();if(!rect.width||!rect.height)return;
+      if(!inline){
+        inline=document.createElement('div');inline.id='easy-notebook-inline-prompts';inline.style.cssText='position:fixed;z-index:2147483646;pointer-events:auto';document.body.append(inline);
+        const inlineRoot=inline.attachShadow({mode:'open'});
+        inlineRoot.innerHTML='<style>:host{display:block}button{border:1px solid #7e9df2;border-radius:18px;background:#eef3ff;color:#234ea7;font:600 13px system-ui,-apple-system,"Segoe UI",sans-serif;padding:9px 13px;box-shadow:0 2px 10px #1026602b;cursor:pointer}button:hover,button:focus-visible{background:#dce7ff;border-color:#416fd7;outline:none}#menu{position:absolute;left:0;bottom:calc(100% + 8px);width:min(320px,calc(100vw - 16px));max-height:330px;overflow:auto;padding:8px;background:#fff;border:1px solid #d4e0f5;border-radius:14px;box-shadow:0 12px 35px #10266038}#menu[hidden]{display:none}.prompt{display:block;width:100%;text-align:left;border:0;background:none;box-shadow:none;border-radius:8px;padding:9px;color:#253f69;font-size:12px}.prompt:hover{background:#edf3ff}.empty{padding:10px;color:#6d7e98;font:12px/1.45 system-ui}.manage{margin-top:5px;width:100%;font-size:12px}</style><button id="open" type="button" aria-label="Abrir prompts salvos" aria-expanded="false">Prompts</button><div id="menu" hidden role="menu"></div>';
+        const open=inlineRoot.querySelector('#open'),menu=inlineRoot.querySelector('#menu');
+        const close=()=>{menu.hidden=true;open.setAttribute('aria-expanded','false');};
+        const render=async()=>{
+          const {localPrompts=[],gaiaPrompts=[],drivePrompts=[]}=await localGet(['localPrompts','gaiaPrompts','drivePrompts']);
+          menu.replaceChildren();
+          for(const prompt of [...localPrompts,...gaiaPrompts,...drivePrompts]){const item=document.createElement('button');item.className='prompt';item.type='button';item.role='menuitem';item.textContent=prompt.title;item.onclick=()=>{try{insert(prompt.body);close();}catch(error){status(error.message);}};menu.append(item);}
+          if(!menu.childElementCount){const empty=document.createElement('p');empty.className='empty';empty.textContent='Nenhum prompt salvo ainda.';menu.append(empty);}
+          const manage=document.createElement('button');manage.className='manage';manage.type='button';manage.textContent=menu.childElementCount===1?'Importar prompts da Gaia':'Gerenciar prompts';manage.onclick=()=>{close();showPanel(true);root.querySelector('#library').scrollIntoView({block:'center'});};menu.append(manage);
+          menu.hidden=false;open.setAttribute('aria-expanded','true');
+        };
+        open.onclick=()=>menu.hidden?render().catch(error=>status(error.message)):close();
+      }
+      const width=92,gap=10,beside=rect.left>=width+gap+8;
+      inline.style.left=Math.round(beside?rect.left-width-gap:Math.max(8,rect.left+10))+'px';
+      inline.style.top=Math.round(beside?rect.top+rect.height/2:Math.max(8,rect.top-42))+'px';
+      inline.style.transform=beside?'translateY(-50%)':'';
+    };
+    const observer=new MutationObserver(place);observer.observe(document.documentElement,{childList:true,subtree:true});
+    addEventListener('resize',place,{passive:true});place();
+    session.onInvalid(()=>{observer.disconnect();inline?.remove();});
+  }
   if(isNotebook){
     button('Importar prompts da Gaia',async()=>{await rpc({type:'OPTIONS'});});
+    inlinePrompts();
 
     library().then(async()=>{const {lastUploadResult}=await localGet('lastUploadResult');const pending=await rpc({type:'FILE_INFO'});if(!pending&&lastUploadResult?.ready&&lastUploadResult.notebookPath===location.pathname)status('PDF pronto para uso: '+lastUploadResult.name);}).catch(e=>status(e.message));chrome.storage.onChanged.addListener((changes,area)=>{if(area==='local'&&(changes.localPrompts||changes.gaiaPrompts||changes.drivePrompts))library().catch(e=>status(e.message));});
     let uploading=false,attempted=false;
