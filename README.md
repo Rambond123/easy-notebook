@@ -1,5 +1,9 @@
 # Easy Notebook — instalar no Chrome
 
+## Novidade na versão 0.22.2: guia para compartilhar
+
+As configurações agora trazem **Abrir guia atualizado** e **Compartilhar**. Este último abre a interface de compartilhamento do navegador quando disponível; caso contrário, copia o link da instalação para envio aos colegas.
+
 ## Novidade na versão 0.22.1: Prompts ao lado do chat
 
 No Notebook, o botão **Prompts** fica à esquerda do campo de conversa. Ele abre a biblioteca da extensão com os prompts locais e os importados da Gaia. O botão flutuante continua disponível como alternativa. No eproc, a extensão não é mais mostrada na edição de minutas ou documentos.
@@ -8,7 +12,7 @@ No Notebook, o botão **Prompts** fica à esquerda do campo de conversa. Ele abr
 
 **Para instalar ou enviar aos colegas, use o link acima.** Ele começa pelo download certo e mostra uma etapa por vez, com o botão procurado em destaque e a indicação da janela onde clicar.
 
-O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.22.1 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
+O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.22.2 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
 
 **Não use Code → Download ZIP nem Source code para instalar:** esses downloads contêm o projeto de desenvolvimento. O botão **Baixar Easy Notebook** dentro do guia entrega o pacote para usuários.
 
