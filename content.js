@@ -119,23 +119,28 @@
       if(!session.active()||running)return;running=true;setProcessStage('running');showPanel(true);
       let stopWatching=()=>{};
       try{
-        if(!document.querySelector('#ifrLeitorPdf')&&!document.querySelector('#divArvore')){await openTree();return;}
+        const pdfFrame=()=>[...document.querySelectorAll('iframe')].find(frame=>{
+          try{return frame.id==='ifrLeitorPdf'||frame.getAttribute('type')==='application/pdf'||new URL(frame.src,location.href).searchParams.get('acao')==='download_documento_unificado';}catch{return frame.id==='ifrLeitorPdf'||frame.getAttribute('type')==='application/pdf';}
+        });
+        if(!pdfFrame()&&!document.querySelector('#divArvore')){await openTree();return;}
         status('AGUARDE — gerando o PDF completo.\nNão é necessário clicar novamente. Selecionando todos os documentos…');
-        const previousPDF=document.querySelector('#ifrLeitorPdf')?.src;
+        const previousPDF=pdfFrame()?.src;
         let readerReloaded=false;
-        const onReaderLoad=event=>{if(event.target?.id==='ifrLeitorPdf')readerReloaded=true;};
-        const observer=new MutationObserver(records=>{if(records.some(record=>record.target.id==='ifrLeitorPdf'||[...record.addedNodes].some(node=>node.id==='ifrLeitorPdf')))readerReloaded=true;});
+        const isPDFFrame=frame=>frame?.tagName==='IFRAME'&&(frame.id==='ifrLeitorPdf'||frame.getAttribute('type')==='application/pdf');
+        const onReaderLoad=event=>{if(isPDFFrame(event.target))readerReloaded=true;};
+        const observer=new MutationObserver(records=>{if(records.some(record=>isPDFFrame(record.target)||[...record.addedNodes].some(isPDFFrame)))readerReloaded=true;});
         observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});
         document.addEventListener('load',onReaderLoad,true);
         stopWatching=()=>{observer.disconnect();document.removeEventListener('load',onReaderLoad,true);};
-        await selectAll();
-        status('AGUARDE — documentos selecionados.\nNão é necessário clicar novamente. Solicitando o PDF completo ao eproc…');
-        await rpc({type:'GENERATE_PDF',printOnly:true});
+        // A própria chamada de geração marca tudo e só então aciona a versão
+        // para impressão. Mantê-las juntas evita que o eproc receba a segunda
+        // ordem antes de terminar de registrar os documentos selecionados.
+        await rpc({type:'GENERATE_PDF'});
         status('AGUARDE — o eproc está montando o PDF completo.\nNão é necessário clicar novamente.');
         const deadline=Date.now()+180000;let url;
         while(Date.now()<deadline){
           if(!session.active())throw Error(session.message);
-          const frame=document.querySelector('#ifrLeitorPdf');
+          const frame=pdfFrame();
           if(frame){const candidate=new URL(frame.src,location.href);if(candidate.searchParams.get('acao')==='download_documento_unificado'&&(candidate.href!==previousPDF||readerReloaded)){url=candidate.href;break;}}
           await new Promise(resolve=>setTimeout(resolve,800));
         }
@@ -156,7 +161,7 @@
     button('Abrir árvore',openTree);
     button('Marcar todos',async()=>{await selectAll();status('Clique em Marcar todos realizado.');});
     button('Versão p/ impressão',async()=>{await rpc({type:'GENERATE_PDF'});status('Marcar todos e Versão p/ impressão acionados. Aguardando o PDF…');});
-    button('Capturar PDF já gerado',async()=>{const frame=document.querySelector('#ifrLeitorPdf');if(!frame){await openTree();return;}const u=new URL(frame.src,location.href);if(u.searchParams.get('acao')!=='download_documento_unificado'){await sendProcess();return;}await captureAndFinish(u.href);});
+    button('Capturar PDF já gerado',async()=>{const frame=[...document.querySelectorAll('iframe')].find(candidate=>{try{return candidate.id==='ifrLeitorPdf'||candidate.getAttribute('type')==='application/pdf'||new URL(candidate.src,location.href).searchParams.get('acao')==='download_documento_unificado';}catch{return candidate.id==='ifrLeitorPdf'||candidate.getAttribute('type')==='application/pdf';}});if(!frame){await openTree();return;}const u=new URL(frame.src,location.href);if(u.searchParams.get('acao')!=='download_documento_unificado'){await sendProcess();return;}await captureAndFinish(u.href);});
     rpc({type:'TREE_JOB'}).then(async job=>{if(!job)return;setProcessStage('running');showPanel(true);status('AGUARDE — gerando o PDF completo.\nNão é necessário clicar novamente. Preparando a árvore de documentos…');const deadline=Date.now()+25000;while(session.active()&&!document.querySelector('#divOpcoesDocumentos')&&Date.now()<deadline)await new Promise(r=>setTimeout(r,300));if(!session.active())return;if(!document.querySelector('#divOpcoesDocumentos')){setProcessStage('idle');status('A árvore ainda não ficou pronta. A tarefa foi preservada; atualize esta aba para retomar.');return;}const claimed=await rpc({type:'TREE_JOB',ready:true});if(claimed)await sendProcess();}).catch(e=>{setProcessStage('idle');showPanel(true);status('Não foi possível continuar na árvore: '+e.message);});
   }
 })();

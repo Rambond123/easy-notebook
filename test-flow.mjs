@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
 const state={},events=[];let handler;
 globalThis.chrome={
   action:{onClicked:{addListener(){}}},runtime:{onInstalled:{addListener(){}},onStartup:{addListener(){}},onMessage:{addListener(fn){handler=fn;}},getManifest:()=>({version:'0.18.0'}),getURL:path=>'chrome-extension://test/'+path},
@@ -23,6 +24,9 @@ assert.ok((await call({type:'TREE_JOB',ready:true})).value.started);
 assert.equal((await call({type:'TREE_JOB'})).value,null);
 assert.ok((await call({type:'START_TREE',url:'https://example.com/'})).error);
 assert.match((await call({type:'MARK_ALL',clientVersion:'0.7.0'})).error,/versão antiga/);
+const contentSource=await readFile(new URL('./content.js',import.meta.url),'utf8');
+assert.match(contentSource,/await rpc\(\{type:'GENERATE_PDF'\}\);/,'O envio automático deve manter marcação e impressão na mesma chamada.');
+assert.doesNotMatch(contentSource,/GENERATE_PDF',printOnly:true/,'O envio automático não pode imprimir antes de a marcação estabilizar.');
 let marked=false,printed=false;
 const originalConfirm=()=>false,originalAlert=()=>{};
 globalThis.window={confirm:originalConfirm,alert:originalAlert};
