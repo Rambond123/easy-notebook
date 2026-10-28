@@ -132,10 +132,9 @@
         observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});
         document.addEventListener('load',onReaderLoad,true);
         stopWatching=()=>{observer.disconnect();document.removeEventListener('load',onReaderLoad,true);};
-        // A própria chamada de geração marca tudo e só então aciona a versão
-        // para impressão. Mantê-las juntas evita que o eproc receba a segunda
-        // ordem antes de terminar de registrar os documentos selecionados.
-        await rpc({type:'GENERATE_PDF'});
+        await selectAll();
+        status('AGUARDE — documentos selecionados.\nNão é necessário clicar novamente. Solicitando o PDF completo ao eproc…');
+        await rpc({type:'GENERATE_PDF',printOnly:true});
         status('AGUARDE — o eproc está montando o PDF completo.\nNão é necessário clicar novamente.');
         const deadline=Date.now()+180000;let url;
         while(Date.now()<deadline){
