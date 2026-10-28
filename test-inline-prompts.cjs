@@ -12,7 +12,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
     assert.equal(await page.evaluate(()=>location.hostname),'notebook.google.com');
     assert.ok(await page.evaluate(()=>document.querySelector('textarea').getBoundingClientRect().width>0),'O campo de chat sintético deve ser visível.');
     await page.addScriptTag({content:`
-      globalThis.chrome={runtime:{id:'test',getManifest:()=>({version:'0.22.4'}),getURL:x=>x,sendMessage:async message=>({value:message.type==='CHECK_SETUP'?{required:false}:null})},storage:{local:{get:async()=>({localPrompts:[{id:'test',title:'Resumo do processo',body:'Texto selecionado',source:'local'}]})},onChanged:{addListener(){}}}};
+      globalThis.chrome={runtime:{id:'test',getManifest:()=>({version:'0.22.5'}),getURL:x=>x,sendMessage:async message=>({value:message.type==='CHECK_SETUP'?{required:false}:null})},storage:{local:{get:async()=>({localPrompts:[{id:'test',title:'Resumo do processo',body:'Texto selecionado',source:'local'}]})},onChanged:{addListener(){}}}};
       globalThis.easyNotebookIsProcessPage=()=>true;
       globalThis.easyNotebookSession=()=>({active:()=>true,call:fn=>Promise.resolve().then(fn),notify:fn=>Promise.resolve().then(fn).catch(()=>{}),onInvalid(){}});
       globalThis.easyNotebookPositionPanel=()=>({refresh(){},isDocked:()=>false});

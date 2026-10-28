@@ -23,6 +23,11 @@ assert.ok((await call({type:'TREE_JOB'})).value.started,'A árvore em outra aba 
 assert.ok((await call({type:'TREE_JOB',ready:true})).value.started);
 assert.equal((await call({type:'TREE_JOB'})).value,null);
 assert.ok((await call({type:'START_TREE',url:'https://example.com/'})).error);
+const externalTree='https://eprocv2-consulta-rs.trf4.jus.br/eprocV2/controlador.php?acao=arvore_documento_listar&txtNumProcesso=50010639520264047119';
+assert.equal((await call({type:'START_TREE',url:externalTree})).value.ok,true,'A árvore originária redirecionada deve permanecer no fluxo.');
+sender.tab.id=10;
+sender.url=externalTree;
+assert.ok((await call({type:'TREE_JOB'})).value.started,'A árvore originária no domínio externo deve recuperar a tarefa.');
 assert.match((await call({type:'MARK_ALL',clientVersion:'0.7.0'})).error,/versão antiga/);
 const contentSource=await readFile(new URL('./content.js',import.meta.url),'utf8');
 assert.match(contentSource,/await selectAll\(\);\s*status\([\s\S]*?await rpc\(\{type:'GENERATE_PDF',printOnly:true\}\);/,'O envio automático deve concluir a marcação pelo caminho comprovado antes de pedir a impressão.');

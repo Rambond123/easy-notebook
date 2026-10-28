@@ -4,6 +4,9 @@ import {directUpload} from './direct-upload-controller.js';
 import './eproc-generation.js';
 import {notebookURL} from './configuration.js';
 import {openWizard,checkSetup,requireSetup,openSettings} from './setup-controller.js';
+const eprocHost='(?:eproc\\.(?:trf4|jfrs|jfsc|jfpr)\\.jus\\.br|eprocv2-consulta-(?:rs|sc|pr)\\.trf4\\.jus\\.br)';
+const isEprocPage=value=>new RegExp('^https://'+eprocHost+'/').test(value);
+const isEprocHost=value=>new RegExp('^'+eprocHost+'$').test(value);
 chrome.action.onClicked.addListener(()=>openSettings().catch(console.error));
 chrome.runtime.onInstalled.addListener(details=>{
   const task=details.reason==='install'?openWizard('install'):checkSetup();task.catch(console.error);
@@ -23,7 +26,7 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
   (async () => {
     if((['START_TREE','MARK_ALL','GENERATE_PDF','CAPTURE'].includes(message.type)||message.type.startsWith('CAPTURE_')||message.type.startsWith('DIRECT_UPLOAD_'))&&message.clientVersion!==chrome.runtime.getManifest().version)throw Error('Esta aba ainda está com uma versão antiga da Easy Notebook. Atualize a página (F5) e tente novamente.');
     if(message.type.startsWith('CAPTURE_')){
-      if(!sender.tab||!/^https:\/\/eproc\.(trf4|jfrs|jfsc|jfpr)\.jus\.br\//.test(sender.url))throw Error('Origem inválida para captura.');
+      if(!sender.tab||!isEprocPage(sender.url))throw Error('Origem inválida para captura.');
       const key='capture:'+sender.tab.id;
       if(message.type==='CAPTURE_BEGIN'){
         const source=new URL(message.url);
@@ -66,7 +69,7 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
     if (message.type === 'START_TREE') {
       const url = new URL(message.url);
       const actions = ['arvore_documento_listar','processo_consultar_arvore_sistema_externo'];
-      if (!sender.tab || !/^https:\/\/eproc\.(trf4|jfrs|jfsc|jfpr)\.jus\.br\//.test(sender.url) || url.protocol !== 'https:' || !/^eproc\.(trf4|jfrs|jfsc|jfpr)\.jus\.br$/.test(url.hostname) || !actions.includes(url.searchParams.get('acao'))) throw Error('Link de árvore inválido.');
+      if (!sender.tab || !isEprocPage(sender.url) || url.protocol !== 'https:' || !isEprocHost(url.hostname) || !actions.includes(url.searchParams.get('acao'))) throw Error('Link de árvore inválido.');
       // Start the job before navigating, so the destination script can resume it.
       await requireSetup();
       const tab = await chrome.tabs.create({url:'about:blank',active:true});
@@ -78,7 +81,7 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
       return {ok:true};
     }
     if (message.type === 'TREE_JOB') {
-      if (!sender.tab || !/^https:\/\/eproc\.(trf4|jfrs|jfsc|jfpr)\.jus\.br\//.test(sender.url)) return null;
+      if (!sender.tab || !isEprocPage(sender.url)) return null;
       const key='treeJob:'+sender.tab.id;
       const data=await chrome.storage.session.get([key,'treeFlow']);
       let job=data[key];
@@ -96,12 +99,12 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
       return job;
     }
     if(message.type==='FLOW_STATUS'){
-      if(!sender.tab||!/^https:\/\/(eproc\.(trf4|jfrs|jfsc|jfpr)\.jus\.br|(notebook|notebooklm)\.google\.com)\//.test(sender.url))return null;
+      if(!sender.tab||!(isEprocPage(sender.url)||/^https:\/\/(notebook|notebooklm)\.google\.com\//.test(sender.url)))return null;
       await chrome.storage.local.set({flowStatus:String(message.text).slice(0,1000),flowUpdated:Date.now()});
       return {ok:true};
     }
     if (message.type === 'GENERATE_PDF' || message.type === 'MARK_ALL') {
-      if (!sender.tab || !/^https:\/\/eproc\.(trf4|jfrs|jfsc|jfpr)\.jus\.br\//.test(sender.url)) throw Error('Página de origem inválida.');
+      if (!sender.tab || !isEprocPage(sender.url)) throw Error('Página de origem inválida.');
       const mode=message.type==='MARK_ALL'?true:(message.printOnly?'print':false);
       const result=await chrome.scripting.executeScript({target:{tabId:sender.tab.id},world:'MAIN',func:globalThis.easyNotebookGeneratePDF,args:[mode]});
       if(result[0]?.result?.ok===false)throw Error('Falha ao '+result[0].result.stage+': '+result[0].result.error);
@@ -110,7 +113,7 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
     }
     if (message.type === 'CAPTURE') {
       const url = new URL(message.url);
-      if (!/^eproc\.(trf4|jfrs|jfsc|jfpr)\.jus\.br$/.test(url.hostname) || url.protocol !== 'https:' || url.searchParams.get('acao') !== 'download_documento_unificado' || new URL(sender.url).origin !== url.origin) throw Error('Endereço de PDF inválido.');
+      if (!isEprocHost(url.hostname) || url.protocol !== 'https:' || url.searchParams.get('acao') !== 'download_documento_unificado' || new URL(sender.url).origin !== url.origin) throw Error('Endereço de PDF inválido.');
       await chrome.storage.session.set({captureURL: url.href});
       return chrome.tabs.create({url: chrome.runtime.getURL('transfer.html')+(message.automatic?'?automatic=1':''),active:!message.automatic});
     }

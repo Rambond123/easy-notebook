@@ -1,8 +1,8 @@
 # Easy Notebook — instalar no Chrome
 
-## Correção 0.22.4: seleção da árvore restaurada
+## Correção 0.22.5: árvore originária externa
 
-Foi restaurado o caminho de seleção do eproc que já estava comprovado: a extensão aciona **Marcar todos**, confirma a conclusão dessa etapa e somente então solicita a **Versão p/ impressão**. A detecção do leitor PDF sem identificador padrão foi mantida.
+Em processos comuns, a extensão mantém a regra de abrir a **Árvore** em Processos relacionados, isto é, a do processo originário. Ela agora também continua o fluxo quando essa árvore é redirecionada para o domínio externo de consulta do eproc. Processos de competência delegada continuam usando a árvore direta.
 
 ## Novidade na versão 0.22.2: guia para compartilhar
 
@@ -16,7 +16,7 @@ No Notebook, o botão **Prompts** fica à esquerda do campo de conversa. Ele abr
 
 **Para instalar ou enviar aos colegas, use o link acima.** Ele começa pelo download certo e mostra uma etapa por vez, com o botão procurado em destaque e a indicação da janela onde clicar.
 
-O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.22.4 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
+O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.22.5 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
 
 **Não use Code → Download ZIP nem Source code para instalar:** esses downloads contêm o projeto de desenvolvimento. O botão **Baixar Easy Notebook** dentro do guia entrega o pacote para usuários.
 
