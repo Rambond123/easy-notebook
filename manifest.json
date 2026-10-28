@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Easy Notebook",
-  "version": "0.22.4",
+  "version": "0.22.5",
   "description": "PDFs completos do eproc no Notebook, com configuração guiada e biblioteca de prompts.",
   "minimum_chrome_version": "120",
   "permissions": [
@@ -15,6 +15,9 @@
     "https://eproc.jfrs.jus.br/*",
     "https://eproc.jfsc.jus.br/*",
     "https://eproc.jfpr.jus.br/*",
+    "https://eprocv2-consulta-rs.trf4.jus.br/*",
+    "https://eprocv2-consulta-sc.trf4.jus.br/*",
+    "https://eprocv2-consulta-pr.trf4.jus.br/*",
     "https://notebook.google.com/*",
     "https://notebooklm.google.com/*"
   ],
@@ -39,7 +42,10 @@
         "https://eproc.trf4.jus.br/*",
         "https://eproc.jfrs.jus.br/*",
         "https://eproc.jfsc.jus.br/*",
-        "https://eproc.jfpr.jus.br/*"
+        "https://eproc.jfpr.jus.br/*",
+        "https://eprocv2-consulta-rs.trf4.jus.br/*",
+        "https://eprocv2-consulta-sc.trf4.jus.br/*",
+        "https://eprocv2-consulta-pr.trf4.jus.br/*"
       ],
       "js": [
         "extension-session.js",
@@ -69,7 +75,10 @@
         "https://eproc.trf4.jus.br/*",
         "https://eproc.jfrs.jus.br/*",
         "https://eproc.jfsc.jus.br/*",
-        "https://eproc.jfpr.jus.br/*"
+        "https://eproc.jfpr.jus.br/*",
+        "https://eprocv2-consulta-rs.trf4.jus.br/*",
+        "https://eprocv2-consulta-sc.trf4.jus.br/*",
+        "https://eprocv2-consulta-pr.trf4.jus.br/*"
       ]
     }
   ]
