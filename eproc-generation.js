@@ -15,35 +15,25 @@ globalThis.easyNotebookGeneratePDF = async function generatePDF(markOnly=false) 
   if(!mark||(markOnly!==true&&!print))throw Error('A árvore abriu, mas seus controles não ficaram disponíveis em 20 segundos.');
   stage='marcar todos';
   if(markOnly!=='print'){
+    if(typeof window.checkTodosDocsArvore!=='function')throw Error('A função checkTodosDocsArvore do eproc não está disponível no contexto da página.');
     const readyDeadline=Date.now()+30000;
     while(true){
-      try{
-        // A chamada direta permite detectar a árvore ainda não inicializada
-        // (o click nativo apenas registra o erro no console e parece ter dado
-        // certo para a extensão). O botão fica como alternativa nas versões
-        // em que a função não é exportada para window.
-        if(typeof window.checkTodosDocsArvore==='function')window.checkTodosDocsArvore();
-        else mark.click();
-        break;
-      }catch(error){
+      try{window.checkTodosDocsArvore();break;}
+      catch(error){
         // The controls exist before eproc assigns its internal arvoreJs.
         // A missing check_all fails before selecting anything; retry only it.
         if(!/check_all/.test(error?.message||'') || Date.now()>=readyDeadline)throw error;
         await new Promise(resolve=>setTimeout(resolve,500));
       }
     }
-    // checkTodosDocsArvore atualiza a árvore de modo assíncrono em algumas
-    // instalações. Sem esta espera, a impressão pode ser solicitada antes de
-    // o eproc considerar os documentos efetivamente selecionados.
-    await new Promise(resolve=>setTimeout(resolve,1500));
   }
   if(markOnly===true)return {ok:true,clicked:'mark-all'};
   stage='gerar a versão para impressão';
   const originalConfirm=window.confirm,originalAlert=window.alert;
   window.confirm=()=>true;window.alert=()=>{};
   try{
-    if(typeof window.gerarVersaoImpressao==='function')window.gerarVersaoImpressao();
-    else print.click();
+    if(typeof window.gerarVersaoImpressao!=='function')throw Error('A função gerarVersaoImpressao do eproc não está disponível no contexto da página.');
+    window.gerarVersaoImpressao();
   }finally{window.confirm=originalConfirm;window.alert=originalAlert;}
   return {ok:true,clicked:'print'};
   } catch(error) { return {ok:false,stage,error:error?.message||String(error)}; }
