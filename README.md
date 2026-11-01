@@ -4,7 +4,7 @@ Extensão para Chrome que envia o PDF completo de um processo do eproc ao Google
 
 ## Instalar
 
-**Usuários:** sigam o [guia de instalação](https://Rambond123.github.io/easy-notebook/). Ele baixa o pacote certo e mostra cada etapa. Não use *Code → Download ZIP* nem *Source code*: esses arquivos são o projeto de desenvolvimento.
+**Usuários:** instalem pelo pacote `Easy-Notebook-<versão>.zip`, não pelo código deste repositório.
 
 **Desenvolvimento:**
 
