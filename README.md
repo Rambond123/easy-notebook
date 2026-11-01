@@ -1,178 +1,37 @@
-# Easy Notebook — instalar no Chrome
+# Easy Notebook
 
-## Correção 0.22.5: árvore originária externa
+Extensão para Chrome que envia o PDF completo de um processo do eproc ao Google Notebook e oferece uma biblioteca de prompts dentro do chat do Notebook.
 
-Em processos comuns, a extensão mantém a regra de abrir a **Árvore** em Processos relacionados, isto é, a do processo originário. Ela agora também continua o fluxo quando essa árvore é redirecionada para o domínio externo de consulta do eproc. Processos de competência delegada continuam usando a árvore direta.
+## Instalar
 
-## Novidade na versão 0.22.2: guia para compartilhar
+**Usuários:** sigam o [guia de instalação](https://Rambond123.github.io/easy-notebook/). Ele baixa o pacote certo e mostra cada etapa. Não use *Code → Download ZIP* nem *Source code*: esses arquivos são o projeto de desenvolvimento.
 
-As configurações agora trazem **Abrir guia atualizado** e **Compartilhar**. Este último abre a interface de compartilhamento do navegador quando disponível; caso contrário, copia o link da instalação para envio aos colegas.
+**Desenvolvimento:**
 
-## Novidade na versão 0.22.1: Prompts ao lado do chat
+1. Abra `chrome://extensions` e ative o **Modo do desenvolvedor**.
+2. Clique em **Carregar sem compactação** e selecione a pasta deste repositório.
+3. Recarregue (F5) as abas do eproc e do Notebook já abertas.
 
-No Notebook, o botão **Prompts** fica à esquerda do campo de conversa. Ele abre a biblioteca da extensão com os prompts locais e os importados da Gaia. O botão flutuante continua disponível como alternativa. No eproc, a extensão não é mais mostrada na edição de minutas ou documentos.
+Requisitos: Chrome 120 ou superior, com o eproc e a conta Google conectados no mesmo perfil do navegador.
 
+## Configurar
 
+No ícone da extensão, abra as configurações e informe o link de um notebook específico. Se houver mais de uma conta Google no navegador, mantenha o parâmetro `authuser` no link.
 
+## Usar
 
-O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.22.5 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
+**Enviar o processo:** na capa do processo, clique em **Easy Notebook** (ao lado de Imprimir) e confirme. A extensão abre a árvore de documentos, marca todos, gera o PDF integral e o envia ao notebook configurado. Aguarde até a fonte aparecer como pronta.
 
-**Não use Code → Download ZIP nem Source code para instalar:** esses downloads contêm o projeto de desenvolvimento. O botão **Baixar Easy Notebook** dentro do guia entrega o pacote para usuários.
+**Prompts:** no Notebook, o botão **Prompts** fica à esquerda do campo de conversa e insere o texto escolhido no chat, sem enviar. Os prompts podem ser cadastrados nas configurações ou importados da Gaia (**Configurações → Importar prompts da Gaia**, com a biblioteca da Gaia aberta no eproc).
 
-O ZIP de instalação contém `1 - INSTALAR NO CHROME.html` e a pasta `Easy Notebook`. Depois de extrair, abra esse HTML: ele começa diretamente na instalação no Chrome, sem repetir download e extração. Os arquivos de código ficam dentro da pasta Easy Notebook e não precisam ser abertos.
+**Opções:** nas configurações é possível substituir todas as fontes do notebook a cada envio (exclusão permanente, desativada por padrão), enviar um PDF já salvo no computador e restaurar a posição do botão.
 
----
+## Desenvolvimento
 
-# Easy Notebook 0.20.3
 
-## Estado de geração persistente
 
-O painel agora controla a geração pelo estado real da tarefa. Mensagens intermediárias de captura e transferência não fazem o botão **Enviar processo ao Notebook** reaparecer. Ele permanece oculto durante toda a geração e, após a captura bem-sucedida, o painel mostra **Geração concluída**. Em caso de falha, o estado é encerrado e o botão volta para permitir nova tentativa.
+## Limitações
 
----
-
-# Easy Notebook 0.20.2
-
-## Aviso de geração na árvore
-
-Durante a geração automática na árvore de documentos, o painel permanece aberto com o aviso **AGUARDE — gerando o PDF completo**. O aviso usa fundo vermelho forte, texto branco e indicador de atividade. A mensagem informa que não é necessário clicar novamente e acompanha as etapas de seleção dos documentos, montagem do PDF pelo eproc e preparação da transferência.
-
-Enquanto a geração estiver em andamento, o botão **Enviar processo ao Notebook** fica oculto e o título da área muda para **Geração em andamento**. Se houver falha, o botão volta a aparecer para permitir uma nova tentativa.
-
----
-
-# Easy Notebook 0.20.1
-
-## Botão somente em processos individuais
-
-No eproc, a interface da extensão só é criada quando a página representa um processo individual. A capa do processo, a árvore e o leitor de documentos continuam atendidos. Localizadores, listas de processos, painéis, relatórios e páginas gerais do sistema não exibem o botão, mesmo quando a URL contém um número usado apenas como filtro.
-
-A identificação considera o número CNJ da URL e marcadores próprios das páginas de detalhes e documentos. No Google Notebook, a biblioteca de prompts continua disponível normalmente.
-
----
-
-# Easy Notebook 0.19.4
-
-## Atualização da extensão com abas abertas
-
-
-
-
-
-## Botão na capa do eproc
-
-Na capa do processo, o botão Easy Notebook é inserido na própria barra de ações, imediatamente depois de Imprimir. Ao clicar, a confirmação “Enviar o pdf completo ao Gemini Notebook?” aparece. Cancelar não inicia a tarefa. Confirmar inicia o envio existente (abrir a árvore, selecionar documentos, gerar e capturar PDF e transferir ao Notebook). Na capa não aparece um segundo botão flutuante. Na árvore e no Notebook, permanece o modo flutuante com a posição salva.
-
-
-## Botão móvel
-
-Arraste o botão Easy Notebook para qualquer ponto da janela. O arraste não abre o painel; um clique normal continua abrindo. A posição é salva neste perfil do navegador e compartilhada entre páginas do eproc e do Notebook, inclusive após recarregar. Ao mudar o tamanho da janela, botão e painel permanecem dentro da área visível. Também é possível mover com Alt + setas quando o botão está focado (Shift aumenta o passo). Em Configurações → Outras opções, use Restaurar posição do botão para voltar ao canto padrão.
-
-
-
-## Limpeza antes do envio
-
-Em Configurações, marque **Remover as fontes atuais antes de enviar** e salve para substituir todas as fontes do notebook de destino a cada envio. A opção começa desativada. A exclusão é permanente e o painel indica quando a limpeza está ativada.
-
-A extensão primeiro transfere e valida o PDF novo. Só depois lista as fontes atuais, registra seus identificadores e solicita a remoção de cada uma. A lista é consultada novamente para confirmar a exclusão antes do registro/upload do PDF novo. Em caso de falha, o PDF temporário e o andamento são preservados para retomada. Fontes adicionadas durante a limpeza, fora da seleção inicial, interrompem o fluxo e são preservadas.
-
-
-## Interface
-
-Painel compacto com o envio principal em destaque, ferramentas do eproc recolhidas, biblioteca pesquisável, estados de sucesso/erro e acesso às configurações. Configurações organizadas por destino, biblioteca do Drive e prompts locais, com botão Salvar fixo. Ícone obtido dos recursos de marca servidos pelo próprio Notebook em `www.gstatic.com/tailwind/_/static/branding/v6/light_mode/favicon/`.
-
-
- 
-
----
-
-# Easy Notebook — versão 0.18
-
-Extensão local para Chrome/Edge.
-
-## Envio direto na versão 0.18
-
-O PDF integral é capturado na sessão do eproc e preservado no armazenamento da extensão. A extensão abre uma guia nova do notebook configurado e envia os bytes diretamente ao serviço de upload do próprio Notebook, usando a sessão Google dessa guia. Não salva uma cópia em Downloads, não usa o botão do Drive, não abre seletor de arquivos e não precisa de auxiliar local nem de chave de API para enviar o PDF.
-
-O link configurado pode conter `authuser=1` para escolher a conta Google. O código respeita a conta informada; não tenta outra conta silenciosamente. O PDF recebe o número do processo e o sufixo `- integral.pdf` quando seu nome de origem contém o número.
-
-O envio só termina quando uma consulta ao Notebook confirma a fonte pelo identificador e seu estado pronto. Nesse momento, o PDF temporário é removido e a guia do Notebook fica em destaque, sem a janela de adicionar fontes. Se a resposta de uma criação ou upload for incerta, a extensão preserva o identificador e o arquivo, em vez de criar outra fonte automaticamente.
-
-
-
-O protocolo de upload é interno ao Notebook e pode mudar. Referência de pesquisa: [ScholarRelay](https://github.com/mahlernim/scholar-relay/blob/main/notebooklm-api.js). As notas de versões anteriores abaixo são históricas e não descrevem o fluxo atual.
-
-## Instalar a partir do código (desenvolvimento)
-
-1. Abra `chrome://extensions` no Chrome normal.
-2. Ative **Modo do desenvolvedor** e clique em **Carregar sem compactação**.
-3. Selecione a pasta onde está o código da extensão.
-4. Clique no ícone Easy Notebook, configure o link de um notebook específico e salve.
-5. Recarregue as páginas do eproc e do Notebook após instalar/atualizar a extensão.
-
-### Instalação guiada para usuários finais
-
-Envie o [guia de instalação](https://Rambond123.github.io/easy-notebook/) ao usuário. Ele oferece o download do pacote, orienta a manter a extração padrão em Downloads e acompanha cada ação no Chrome. Há um botão funcional para copiar o endereço da tela de extensões. As figuras são identificadas como referências visuais, não como botões que controlam o navegador.
-
-O Chrome exige que o próprio usuário ative o modo do desenvolvedor e confirme a pasta. Uma página comum não pode clicar nos controles de `chrome://extensions` nem instalar silenciosamente uma extensão fora da Chrome Web Store.
-
-
-
-## Prompts
-
-O botão flutuante Easy Notebook abre a biblioteca. Cadastre prompts locais na configuração. **Usar** preenche a conversa e não envia a pergunta. Abra a aba Chat antes de inserir.
-
-Nas **Configurações → Importar prompts da Gaia**, escolha a guia do eproc com a biblioteca de prompts aberta e clique em **Buscar prompts**. Pesquise por título, descrição ou autor; marque os textos desejados e clique em **Importar selecionados**. **Ver texto** abre uma prévia do conteúdo completo e da versão antes da importação.
-
-Os textos ficam salvos no navegador e aparecem no painel do Notebook. Importar novamente o mesmo identificador, na mesma origem do eproc, atualiza sua cópia; títulos iguais com identificadores diferentes continuam separados. A importação só grava depois que todos os textos escolhidos foram lidos. Falhas preservam a biblioteca anterior. Remover na extensão não exclui nada na Gaia.
-
-Não é necessário configurar Drive, chave de API ou auxiliar local. Prompts locais e textos importados anteriormente do Drive são preservados. Os textos são exibidos e inseridos no chat; nunca são executados como código. A extensão não executa prompts nem altera a biblioteca da Gaia. A conta do eproc precisa estar autenticada no mesmo navegador/perfil da extensão.
-
-A leitura foi conferida no modal de prompts da Gaia. A extensão também procura o link existente da biblioteca no menu, sem fabricar endereços assinados; se não o encontrar, pede que você abra a biblioteca no eproc. O acesso direto pelo menu pode variar entre instalações do eproc.
-
-## PDF do eproc
-
-1. Na capa do processo, clique em **Enviar processo ao Notebook**.
-2. A extensão abre a árvore dos relacionados ou das ferramentas e continua na nova aba.
-3. Marca todos, aciona a versão de impressão e aceita os avisos JavaScript síncronos dessa geração.
-4. Aguarda o novo PDF completo por até 3 minutos e abre a transferência com captura automática.
-5. Se a captura funcionar, destaca o notebook e tenta anexar o PDF. Confira o processamento nas fontes.
-
-Alternativa: na configuração clique em **Selecionar PDF**, escolha o arquivo já salvo e clique em **Enviar PDF selecionado**.
-
-Captura e anexação são experimentais: cookies de sessão, alterações na interface ou eventos de arquivo rejeitados pelo site podem impedir o fluxo. A presença do nome na página é uma confirmação parcial; confira que a fonte terminou de processar. Não há envio automático de prompts. Limite local do protótipo: 200 MB por PDF.
-
-O arquivo pendente fica temporariamente no IndexedDB da extensão e é removido após o nome aparecer na página ou ao preparar outro arquivo. Sem confirmação ele permanece para nova tentativa. Nenhum servidor próprio recebe o PDF; o destino do upload é o notebook configurado. Não são gravadas URLs autenticadas do eproc em logs ou em configuração permanente.
-
-
-
-Verificações de sintaxe e estrutura local são feitas na entrega. A extensão ainda precisa ser carregada no Chrome e testada de ponta a ponta.
-
-## Próximas etapas
-
-
-
-
-
-## Correção 0.3
-
-
-
-
-
-## Ajustes 0.4
-
-Salvar configurações fica em uma barra fixa no topo com confirmação de horário. Campos opcionais podem ficar vazios. A pasta de salvamento é a pasta padrão de downloads do navegador; o botão Salvar cópia também usa a API de downloads com saveAs false. O botão Abrir pasta de downloads facilita localizar o PDF. Marcar todos manual e geração automática usam a mesma rotina, incluindo verificação da seleção dos documentos. O botão nativo Marcar todos do eproc é um link com uma imagem estática; a confirmação é a marcação de cada documento e a contagem mostrada pela extensão.
-
-
-## Versão 0.12
-
-
-
-
-## Versão 0.14 — captura na árvore
-
-
-
-
-
+- O envio usa protocolos internos do Notebook, que o Google pode mudar sem aviso.
+- Limite de 200 MB por PDF.
+- O PDF vai direto do navegador para o Notebook; não há servidor intermediário.
