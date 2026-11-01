@@ -12,9 +12,8 @@ As configurações agora trazem **Abrir guia atualizado** e **Compartilhar**. Es
 
 No Notebook, o botão **Prompts** fica à esquerda do campo de conversa. Ele abre a biblioteca da extensão com os prompts locais e os importados da Gaia. O botão flutuante continua disponível como alternativa. No eproc, a extensão não é mais mostrada na edição de minutas ou documentos.
 
-## [▶ ABRIR O GUIA DE INSTALAÇÃO](https://Rambond123.github.io/easy-notebook/)
 
-**Para instalar ou enviar aos colegas, use o link acima.** Ele começa pelo download certo e mostra uma etapa por vez, com o botão procurado em destaque e a indicação da janela onde clicar.
+
 
 O guia mantém o destino padrão de extração em **Downloads**. No Chrome, escolha **Downloads → Easy-Notebook-0.22.5 → Easy Notebook**. Mantenha essa pasta no computador; apenas o ZIP pode ser apagado. Não usa instalador `.exe` ou `.cmd`.
 
@@ -65,7 +64,6 @@ A identificação considera o número CNJ da URL e marcadores próprios das pág
 Na capa do processo, o botão Easy Notebook é inserido na própria barra de ações, imediatamente depois de Imprimir. Ao clicar, a confirmação “Enviar o pdf completo ao Gemini Notebook?” aparece. Cancelar não inicia a tarefa. Confirmar inicia o envio existente (abrir a árvore, selecionar documentos, gerar e capturar PDF e transferir ao Notebook). Na capa não aparece um segundo botão flutuante. Na árvore e no Notebook, permanece o modo flutuante com a posição salva.
 
 
-
 ## Botão móvel
 
 Arraste o botão Easy Notebook para qualquer ponto da janela. O arraste não abre o painel; um clique normal continua abrindo. A posição é salva neste perfil do navegador e compartilhada entre páginas do eproc e do Notebook, inclusive após recarregar. Ao mudar o tamanho da janela, botão e painel permanecem dentro da área visível. Também é possível mover com Alt + setas quando o botão está focado (Shift aumenta o passo). Em Configurações → Outras opções, use Restaurar posição do botão para voltar ao canto padrão.
@@ -78,15 +76,13 @@ Em Configurações, marque **Remover as fontes atuais antes de enviar** e salve 
 
 A extensão primeiro transfere e valida o PDF novo. Só depois lista as fontes atuais, registra seus identificadores e solicita a remoção de cada uma. A lista é consultada novamente para confirmar a exclusão antes do registro/upload do PDF novo. Em caso de falha, o PDF temporário e o andamento são preservados para retomada. Fontes adicionadas durante a limpeza, fora da seleção inicial, interrompem o fluxo e são preservadas.
 
-A limpeza usa a operação `tGMBJ` da interface web do Notebook, documentada no projeto [notebooklm-py](https://github.com/teng-lin/notebooklm-py/blob/main/docs/rpc-reference.md). É um protocolo interno sujeito a mudanças do Google. Não usa uma API criada na conta TRF.
 
 ## Interface
 
 Painel compacto com o envio principal em destaque, ferramentas do eproc recolhidas, biblioteca pesquisável, estados de sucesso/erro e acesso às configurações. Configurações organizadas por destino, biblioteca do Drive e prompts locais, com botão Salvar fixo. Ícone obtido dos recursos de marca servidos pelo próprio Notebook em `www.gstatic.com/tailwind/_/static/branding/v6/light_mode/favicon/`.
 
 
-
-
+ 
 
 ---
 
