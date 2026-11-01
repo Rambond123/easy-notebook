@@ -26,9 +26,9 @@ No ícone da extensão, abra as configurações e informe o link de um notebook 
 
 **Opções:** nas configurações é possível substituir todas as fontes do notebook a cada envio (exclusão permanente, desativada por padrão), enviar um PDF já salvo no computador e restaurar a posição do botão.
 
-## Desenvolvimento
+## Gerar o pacote de instalação
 
-
+Execute `distribuicao/criar-pacote.ps1` para gerar `pacotes/Easy-Notebook-<versão>.zip`, usando a versão do `manifest.json`. O guia de instalação fica em `docs/index.html`.
 
 ## Limitações
 
