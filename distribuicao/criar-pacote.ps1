@@ -47,8 +47,6 @@ try {
     $guide = [regex]::Replace($guide, '(?s)<!-- DOWNLOAD-STEPS-START -->.*?<!-- DOWNLOAD-STEPS-END -->', '')
     $guide = $guide.Replace('<!-- INSTALL-HEADING -->', '<p class="tip">Voc&#234; j&#225; extraiu os arquivos. Agora vamos instalar a extens&#227;o no Chrome.</p>')
     $guide = [regex]::Replace($guide, '(?s)<noscript>.*?</noscript>', '<noscript><p>No Chrome, abra chrome://extensions, ative Modo do desenvolvedor e clique em Carregar sem compacta&#231;&#227;o. Selecione a pasta Easy Notebook que est&#225; ao lado deste arquivo.</p></noscript>')
-    $guide = [regex]::Replace($guide, 'J.{1} baixei', 'Abri a tela de extensoes')
-    $guide = [regex]::Replace($guide, '<br>\s*<a [^>]*github\.com[^>]*>.*?</a>', '')
     [IO.File]::WriteAllText((Join-Path $stageDir '1 - INSTALAR NO CHROME.html'), $guide, [Text.UTF8Encoding]::new($false))
 
     foreach ($relativePath in $runtimeFiles) {
