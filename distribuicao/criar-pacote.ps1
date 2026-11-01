@@ -26,8 +26,8 @@ $runtimeFiles = @(
     'background.js', 'configuration.js', 'content.js', 'db.js',
     'direct-upload-controller.js', 'gaia-page.js', 'gaia-import.js', 'gaia-options.js', 'eproc-capture.js',
     'eproc-generation.js', 'eproc-toolbar.js', 'extension-session.js',
-    'manifest.json', 'notebook-direct-upload.js', 'notebook-page-upload.js',
-    'notebook-upload.js', 'options.html', 'options.js', 'page-scope.js',
+    'manifest.json', 'notebook-direct-upload.js',
+    'options.html', 'options.js', 'page-scope.js',
     'panel-position.js', 'panel-ui.js', 'setup-controller.js', 'transfer.html',
     'transfer.js', 'ui.css', 'wizard.css', 'wizard.html', 'wizard.js'
 )
